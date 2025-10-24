@@ -1,6 +1,6 @@
 {
-  "name": "realtime-launchpad",
-  "version": "0.1.0",
+  "name": "real-time-launchpad",
+  "version": "0.2.0",
   "private": true,
   "author": "Rich Lewis",
   "description": "A modern e-commerce marketplace application showcasing React 19's latest features",
@@ -14,7 +14,7 @@
     "@tanstack/react-virtual": "^3.13.12",
     "babel-plugin-react-compiler": "^1.0.0",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.546.0",
+    "lucide-react": "^0.547.0",
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
