@@ -1,12 +1,14 @@
-# Real-Time Launchpad 🚀
+# Real-Time Launchpad React 19 demo app
 
-Hey there! I'm Rich Lewis, and this is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and see how they work together in a real application.
+Hey there! I'm Rich Lewis, and this is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and show how they work together in a real application.
 
 ## What's this about?
 
-I've been an active user of React since its early days, and have been closelyfollowing React's evolution. When React 19 came out, I wanted to build something that uses and demonstrates to students of React all of the cool new features. So I created this e-commerce demo that showcases Server Components, Suspense streaming, Server Actions, and optimistic updates in action.
+I've been an active user of React since its early days, and have been closely following React's evolution. When React 19 came out, I wanted to build something that uses and demonstrates to students of React all of the cool new features. So I created this e-commerce demo that showcases Server Components, Suspense streaming, Server Actions, and optimistic updates in action.
 
-## What's inside?
+Be sure to check out the [Educational Guides](#-educational-guides) section in this README to see how you can learn from this demo.
+
+## What's does this demo app include?
 
 ### The React 19 stuff I'm excited about
 - **Server Components** - Awesome! Server-side rendering that makes sense for React
@@ -20,9 +22,11 @@ I've been an active user of React since its early days, and have been closelyfol
 - Browse and search products
 - Real-time search that's actually responsive
 - Shopping cart with instant updates
+- Favorites/starred products system
 - User profiles and settings
-- Product reviews
+- Product reviews and ratings
 - Admin panel to test things
+- Checkout process with order confirmation
 
 ## Tech choices
 
@@ -52,11 +56,13 @@ Then open [http://localhost:3000](http://localhost:3000) and check it out.
 ```
 src/
 ├── app/                    # Next.js pages
-│   ├── admin/             # Admin stuff
-│   ├── cart/              # Shopping cart
-│   ├── product/[id]/      # Product pages
-│   ├── profile/           # User profiles
+│   ├── admin/             # Admin panel and settings
+│   ├── cart/              # Shopping cart functionality
+│   ├── checkout/          # Checkout process
+│   ├── product/[id]/      # Individual product pages
+│   ├── profile/           # User profile management
 │   ├── search/            # Search functionality
+│   ├── starred/           # Favorites/starred products
 │   └── page.tsx           # Home page
 ├── actions/               # Server actions
 ├── components/            # React components
@@ -119,6 +125,16 @@ const [isPending, startTransition] = useTransition();
 const deferredQuery = useDeferredValue(query);
 ```
 
+### Favorites System
+Star products to save them for later with instant feedback:
+
+```tsx
+const [starred, setStarred] = useOptimistic(
+  initialStarred, 
+  (_prev, next: boolean) => next
+);
+```
+
 ## Testing things out
 
 There's an admin panel at `/admin` where you can:
@@ -160,11 +176,11 @@ One of my main goals with any project I share is to help other developers learn.
 - **[Performance Optimization](./docs/performance.md)** - How I made this app fast and what you can learn from it
 - **[Architecture Decisions](./docs/architecture.md)** - Why I chose certain patterns and how to think about app structure
 
-### 🎯 Code Documentation
+### Code Documentation
 
 Every major component and function is thoroughly documented with inline comments explaining the thinking behind the implementation. I've also added educational comments that go beyond just explaining what the code does - they explain why it works this way and what alternatives I considered.
 
-### 🚀 Getting the Most Out of This Project
+### Getting the Most Out of This Project
 
 1. **Start with the guides** - Read through the educational documents to understand the concepts
 2. **Explore the code** - Look at the implementations with the context from the guides

@@ -20,6 +20,14 @@ Architecture isn't about following the latest trends or using the most popular p
 ```
 src/
 ├── app/                    # Next.js App Router pages
+│   ├── admin/             # Admin panel and settings
+│   ├── cart/              # Shopping cart functionality
+│   ├── checkout/          # Checkout process
+│   ├── product/[id]/      # Individual product pages
+│   ├── profile/           # User profile management
+│   ├── search/            # Search functionality
+│   ├── starred/           # Favorites/starred products
+│   └── page.tsx           # Home page
 ├── actions/               # Server Actions
 ├── components/            # React components
 └── lib/                   # Utilities and data
@@ -114,6 +122,52 @@ export interface Product {
 2. **Testability**: Easy to test data operations independently
 3. **Maintainability**: Changes to data structure are localized
 4. **Type Safety**: Full TypeScript support across the data layer
+
+## User Interaction Patterns
+
+### Favorites/Starred Products System
+
+I implemented a favorites system that demonstrates optimistic updates and real-time synchronization:
+
+```tsx
+// components/OptimisticStar.client.tsx - Optimistic star button
+export default function OptimisticStar({ 
+  product, 
+  initialStarred, 
+  userId 
+}: OptimisticStarProps) {
+  const [starred, setStarred] = useOptimistic(
+    initialStarred, 
+    (_prev, next: boolean) => next
+  );
+  
+  const [state, formAction] = useActionState(toggleStar, { ok: false });
+  
+  return (
+    <form action={formAction}>
+      <input type="hidden" name="productId" value={product.id} />
+      <input type="hidden" name="userId" value={userId} />
+      <button
+        type="submit"
+        className={`p-2 rounded-full transition-colors ${
+          starred 
+            ? 'text-yellow-500 hover:text-yellow-600' 
+            : 'text-gray-400 hover:text-yellow-500'
+        }`}
+      >
+        <Star className="h-5 w-5" fill={starred ? 'currentColor' : 'none'} />
+      </button>
+    </form>
+  );
+}
+```
+
+### Why This Pattern Works
+
+1. **Instant Feedback**: Users see changes immediately
+2. **Automatic Rollback**: Errors revert the UI state
+3. **Real-time Sync**: Changes propagate across all components
+4. **Type Safety**: Full TypeScript support for all interactions
 
 ## State Management Architecture
 
