@@ -59,7 +59,7 @@ export default function Home() {
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Welcome to Realtime Launchpad
+          Welcome to Real-Time Launchpad
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Experience the future of e-commerce with React 19's latest features: 

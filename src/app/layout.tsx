@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Realtime Launchpad - Modern E-commerce Demo",
+  title: "Real-Time Launchpad - Modern E-commerce Demo",
   description: "A showcase of React 19 and Next.js features including Server Components, Suspense, Actions, and optimistic updates",
   keywords: ["React 19", "Next.js", "Server Components", "Suspense", "E-commerce"],
   authors: [{ name: "Rich Lewis" }],
@@ -38,7 +38,7 @@ export default function RootLayout({
                 <div className="flex justify-between items-center h-16">
                   <div className="flex items-center">
                     <h1 className="text-xl font-bold text-gray-900">
-                      Realtime Launchpad
+                      Real-Time Launchpad
                     </h1>
                   </div>
                   <nav className="hidden md:flex space-x-8">
@@ -69,7 +69,7 @@ export default function RootLayout({
             <footer className="bg-white border-t">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="text-center text-gray-600">
-                  <p>Realtime Launchpad - Demonstrating React 19 & Next.js Features</p>
+                  <p>Real-Time Launchpad - Demonstrating React 19 & Next.js Features</p>
                   <p className="text-sm mt-2">
                     Built by Rich Lewis with React 19, Next.js 15, Server Components, Suspense, and Actions
                   </p>
