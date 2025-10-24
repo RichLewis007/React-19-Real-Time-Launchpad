@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Realtime Launchpad - Modern E-commerce Demo",
   description: "A showcase of React 19 and Next.js features including Server Components, Suspense, Actions, and optimistic updates",
   keywords: ["React 19", "Next.js", "Server Components", "Suspense", "E-commerce"],
-  authors: [{ name: "Rich" }],
+  authors: [{ name: "Rich Lewis" }],
   viewport: "width=device-width, initial-scale=1",
 };
 
@@ -71,7 +71,7 @@ export default function RootLayout({
                 <div className="text-center text-gray-600">
                   <p>Realtime Launchpad - Demonstrating React 19 & Next.js Features</p>
                   <p className="text-sm mt-2">
-                    Built with React 19, Next.js 15, Server Components, Suspense, and Actions
+                    Built by Rich Lewis with React 19, Next.js 15, Server Components, Suspense, and Actions
                   </p>
                 </div>
               </div>
