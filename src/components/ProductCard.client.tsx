@@ -8,12 +8,34 @@ import { addToCart } from "@/actions/addToCart";
 import { useActionState } from "react";
 import { useId } from "react";
 
+/**
+ * ProductCard Component
+ * 
+ * This component demonstrates several key React 19 patterns:
+ * 1. Server Actions integration with useActionState
+ * 2. Optimistic updates for the star/favorite functionality
+ * 3. Form handling without traditional API endpoints
+ * 4. Responsive design with Tailwind CSS
+ * 
+ * Why I built it this way:
+ * - useActionState provides built-in loading states and error handling
+ * - OptimisticStar shows immediate feedback while server processes the request
+ * - Form submission is handled by Server Actions, no need for fetch requests
+ * - The component is self-contained with all its functionality
+ */
+
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  // useActionState is a React 19 hook that manages form state for Server Actions
+  // It provides the current state and an action function that can be used in forms
+  // The second parameter is the initial state
   const [state, formAction] = useActionState(addToCart, { ok: false });
+  
+  // useId generates unique IDs for form elements to avoid conflicts
+  // This is especially important when multiple ProductCards are rendered
   const formId = useId();
 
   return (
@@ -26,6 +48,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           className="w-full h-full object-cover"
           loading="lazy"
         />
+        {/* OptimisticStar demonstrates React 19's optimistic updates pattern */}
+        {/* It shows immediate feedback when clicked, then reverts if the server request fails */}
         <div className="absolute top-2 right-2">
           <OptimisticStar 
             productId={product.id} 
@@ -80,8 +104,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           ))}
         </div>
 
-        {/* Add to Cart Form */}
+        {/* Add to Cart Form - demonstrates Server Actions integration */}
+        {/* The form's action attribute points to the Server Action function */}
+        {/* No need for fetch requests, event handlers, or complex state management */}
         <form action={formAction} className="space-y-2">
+          {/* Hidden inputs provide data to the Server Action */}
           <input type="hidden" name="productId" value={product.id} />
           <input type="hidden" name="userId" value="demo_user" />
           
@@ -106,7 +133,8 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </form>
 
-        {/* Status Messages */}
+        {/* Status Messages - automatically provided by useActionState */}
+        {/* These show success/error feedback from the Server Action */}
         {!state.ok && state.error && (
           <div className="text-red-600 text-sm mt-2">
             {state.error}
