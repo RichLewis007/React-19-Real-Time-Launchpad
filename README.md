@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="./assets/banner.jpg" alt="Real-Time Launchpad Banner" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+</div>
+
 # Real-Time Launchpad 
 A React 19 demo app.
 
