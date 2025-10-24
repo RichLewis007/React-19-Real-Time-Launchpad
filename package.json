@@ -2,6 +2,8 @@
   "name": "realtime-launchpad",
   "version": "0.1.0",
   "private": true,
+  "author": "Rich Lewis",
+  "description": "A modern e-commerce marketplace application showcasing React 19's latest features",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
