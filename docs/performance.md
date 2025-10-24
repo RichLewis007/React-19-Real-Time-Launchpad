@@ -152,13 +152,15 @@ function App() {
 
 ### 2. Image Optimization
 
-Next.js automatically optimizes images, but I also use proper sizing:
+Next.js automatically optimizes images, but I also use proper sizing. All images are sourced from [Unsplash](https://unsplash.com) for high-quality, free stock photos:
 
 ```tsx
-// Optimized image loading
-<img
+// Optimized image loading with Next.js Image component
+<Image
   src={product.images[0] || "/placeholder-product.svg"}
   alt={product.title}
+  width={400}
+  height={400}
   className="w-full h-full object-cover"
   loading="lazy"
 />

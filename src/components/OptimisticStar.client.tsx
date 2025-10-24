@@ -18,24 +18,27 @@ export function OptimisticStar({
 }: OptimisticStarProps) {
   const [isPending, startTransition] = useTransition();
   const [starred, setStarred] = useOptimistic(
-    initialStarred, 
-    (_prev, next: boolean) => next
+    initialStarred,
+    (currentState, optimisticValue) => optimisticValue
   );
 
   const handleToggle = () => {
     const newStarred = !starred;
-    setStarred(newStarred);
     
     startTransition(async () => {
+      // Optimistic update
+      setStarred(newStarred);
+      
       try {
         const success = await toggleStar(productId);
         if (!success) {
           // Revert on failure
-          setStarred(starred);
+          setStarred(!newStarred);
         }
       } catch (error) {
+        console.error("Error toggling star:", error);
         // Revert on error
-        setStarred(starred);
+        setStarred(!newStarred);
       }
     });
   };

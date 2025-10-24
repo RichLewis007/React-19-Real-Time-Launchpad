@@ -28,6 +28,7 @@ export interface User {
   email: string;
   avatarUrl: string;
   preferences: UserPreferences;
+  starredProducts: string[]; // Array of product IDs
   createdAt: Date;
 }
 

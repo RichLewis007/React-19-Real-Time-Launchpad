@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ErrorBoundary } from "@/components/ErrorBoundary.client";
+import { ShoppingCart } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,11 @@ export const metadata: Metadata = {
   description: "A showcase of React 19 and Next.js features including Server Components, Suspense, Actions, and optimistic updates",
   keywords: ["React 19", "Next.js", "Server Components", "Suspense", "E-commerce"],
   authors: [{ name: "Rich Lewis" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -48,7 +53,11 @@ export default function RootLayout({
                     <a href="/search" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                       Search
                     </a>
-                    <a href="/cart" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <a href="/starred" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                      Favorites
+                    </a>
+                    <a href="/cart" className="flex items-center gap-2 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold border border-blue-200 transition-all duration-200">
+                      <ShoppingCart className="h-4 w-4" />
                       Cart
                     </a>
                     <a href="/profile" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
@@ -72,6 +81,9 @@ export default function RootLayout({
                   <p>Real-Time Launchpad - Demonstrating React 19 & Next.js Features</p>
                   <p className="text-sm mt-2">
                     Built by Rich Lewis with React 19, Next.js 15, Server Components, Suspense, and Actions
+                  </p>
+                  <p className="text-xs mt-2 text-gray-500">
+                    Images by <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">Unsplash</a>
                   </p>
                 </div>
               </div>

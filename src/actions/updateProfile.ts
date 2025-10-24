@@ -59,12 +59,40 @@ export async function updateProfile(
 
 export async function toggleStar(productId: string): Promise<boolean> {
   try {
-    // In a real app, you would toggle the star status in the database
-    // For demo purposes, we'll just return true
-    await new Promise(resolve => setTimeout(resolve, 500));
-    return true;
+    const userId = "demo_user"; // In a real app, this would come from authentication
+    
+    // Check if product is already starred
+    const isStarred = await db.isProductStarred(userId, productId);
+    
+    let success = false;
+    if (isStarred) {
+      // Remove from starred
+      success = await db.removeFromStarred(userId, productId);
+    } else {
+      // Add to starred
+      success = await db.addToStarred(userId, productId);
+    }
+
+    if (success) {
+      // Revalidate pages that show starred products
+      revalidatePath("/");
+      revalidatePath("/search");
+      revalidatePath("/starred");
+    }
+
+    return success;
   } catch (error) {
     console.error("Toggle star error:", error);
+    return false;
+  }
+}
+
+export async function removeFromStarred(productId: string): Promise<boolean> {
+  try {
+    const userId = "demo_user"; // In a real app, this would come from authentication
+    return await db.removeFromStarred(userId, productId);
+  } catch (error) {
+    console.error("Remove from starred error:", error);
     return false;
   }
 }

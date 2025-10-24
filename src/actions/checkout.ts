@@ -2,6 +2,7 @@
 
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { ActionState } from "@/lib/types";
 
 export async function checkout(
@@ -15,6 +16,12 @@ export async function checkout(
     if (!cart || cart.items.length === 0) {
       return { ok: false, error: "Cart is empty" };
     }
+
+    // Calculate total before clearing cart
+    const total = cart.items.reduce((sum, item) => sum + (item.priceAtAddCents * item.quantity), 0);
+    const orderId = `order_${Date.now()}`;
+
+    console.log('Checkout debug:', { orderId, total, itemCount: cart.items.length });
 
     // Simulate payment processing
     await new Promise(resolve => setTimeout(resolve, 2000));
@@ -33,15 +40,20 @@ export async function checkout(
     revalidatePath("/cart");
     revalidatePath("/");
 
-    return { 
-      ok: true, 
-      data: { 
-        message: "Order placed successfully!",
-        orderId: `order_${Date.now()}`,
-        total: cart.items.reduce((sum, item) => sum + (item.priceAtAddCents * item.quantity), 0)
-      } 
-    };
+    // Construct URL with proper encoding
+    const successUrl = `/checkout/success?orderId=${encodeURIComponent(orderId)}&total=${encodeURIComponent(total.toString())}`;
+    console.log('Redirecting to:', successUrl);
+    
+    // Redirect to success page with order details
+    redirect(successUrl);
   } catch (error) {
+    // Check if this is a redirect (which is expected)
+    if (error && typeof error === 'object' && 'digest' in error && 
+        typeof error.digest === 'string' && error.digest.includes('NEXT_REDIRECT')) {
+      // This is a redirect, not an error - re-throw it
+      throw error;
+    }
+    
     console.error("Checkout error:", error);
     return { 
       ok: false, 

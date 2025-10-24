@@ -7,6 +7,7 @@ import { OptimisticStar } from "./OptimisticStar.client";
 import { addToCart } from "@/actions/addToCart";
 import { useActionState } from "react";
 import { useId } from "react";
+import ImageWithFallback from "./ImageWithFallback.client";
 
 /**
  * ProductCard Component
@@ -26,9 +27,10 @@ import { useId } from "react";
 
 interface ProductCardProps {
   product: Product;
+  initialStarred?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, initialStarred = false }: ProductCardProps) {
   // useActionState is a React 19 hook that manages form state for Server Actions
   // It provides the current state and an action function that can be used in forms
   // The second parameter is the initial state
@@ -42,18 +44,21 @@ export default function ProductCard({ product }: ProductCardProps) {
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
       {/* Product Image */}
       <div className="aspect-square bg-gray-100 relative overflow-hidden">
-        <img
+        {/* Product images are sourced from Unsplash (https://unsplash.com) */}
+        <ImageWithFallback
           src={product.images[0] || "/placeholder-product.svg"}
           alt={product.title}
+          width={400}
+          height={400}
           className="w-full h-full object-cover"
-          loading="lazy"
+          fallbackSrc="/placeholder-product.svg"
         />
         {/* OptimisticStar demonstrates React 19's optimistic updates pattern */}
         {/* It shows immediate feedback when clicked, then reverts if the server request fails */}
         <div className="absolute top-2 right-2">
           <OptimisticStar 
             productId={product.id} 
-            initialStarred={false}
+            initialStarred={initialStarred}
             className="bg-white/80 backdrop-blur-sm"
           />
         </div>

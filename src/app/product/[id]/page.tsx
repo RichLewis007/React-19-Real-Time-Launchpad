@@ -4,6 +4,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary.client";
 import { Suspense } from "react";
 import { Star, ArrowLeft, Package, Truck, Shield } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import AddToCartForm from "./AddToCartForm.client";
 
 interface ProductPageProps {
@@ -115,9 +116,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {/* Product Images */}
           <div className="space-y-4">
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-              <img
+              <Image
                 src={product.images[0] || "/placeholder-product.svg"}
                 alt={product.title}
+                width={600}
+                height={600}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -125,9 +128,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <div className="grid grid-cols-4 gap-2">
                 {product.images.slice(1).map((image, index) => (
                   <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <img
+                    <Image
                       src={image}
                       alt={`${product.title} ${index + 2}`}
+                      width={150}
+                      height={150}
                       className="w-full h-full object-cover"
                     />
                   </div>

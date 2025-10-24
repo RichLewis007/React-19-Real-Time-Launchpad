@@ -14,7 +14,8 @@ class MockDatabase {
   }
 
   private seedData() {
-    // Seed products
+    // Seed products with images from Unsplash (https://unsplash.com)
+    // All images are free to use under the Unsplash License
     this.products = [
       {
         id: 'p_1',
@@ -22,7 +23,10 @@ class MockDatabase {
         priceCents: 19999,
         tags: ['electronics', 'audio', 'wireless'],
         rating: 4.5,
-        images: ['/placeholder-product.svg', '/placeholder-product.svg'],
+        images: [
+          'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1741770067276-a10e15ff5197?w=800&h=800&fit=crop&crop=center'
+        ],
         specs: {
           'Battery Life': '30 hours',
           'Connectivity': 'Bluetooth 5.0',
@@ -40,7 +44,10 @@ class MockDatabase {
         priceCents: 29999,
         tags: ['electronics', 'fitness', 'wearable'],
         rating: 4.3,
-        images: ['/placeholder-product.svg', '/placeholder-product.svg'],
+        images: [
+          'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&h=800&fit=crop&crop=center'
+        ],
         specs: {
           'Display': '1.4" AMOLED',
           'Battery Life': '7 days',
@@ -58,7 +65,10 @@ class MockDatabase {
         priceCents: 14999,
         tags: ['electronics', 'gaming', 'keyboard'],
         rating: 4.7,
-        images: ['/placeholder-product.svg', '/placeholder-product.svg'],
+        images: [
+          'https://images.unsplash.com/photo-1656711081969-9d16ebc2d210?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1595225476474-87563907a212?w=800&h=800&fit=crop&crop=center'
+        ],
         specs: {
           'Switch Type': 'Cherry MX Red',
           'Backlight': 'RGB',
@@ -76,7 +86,10 @@ class MockDatabase {
         priceCents: 59999,
         tags: ['electronics', 'display', 'monitor'],
         rating: 4.8,
-        images: ['/placeholder-product.svg', '/placeholder-product.svg'],
+        images: [
+          'https://images.unsplash.com/photo-1547658718-1cdaa0852790?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1757774636742-0a5dc7e5c07a?w=800&h=800&fit=crop&crop=center'
+        ],
         specs: {
           'Resolution': '3840 x 2160',
           'Panel Type': 'IPS',
@@ -94,7 +107,10 @@ class MockDatabase {
         priceCents: 8999,
         tags: ['electronics', 'gaming', 'mouse'],
         rating: 4.4,
-        images: ['/placeholder-product.svg', '/placeholder-product.svg'],
+        images: [
+          'https://images.unsplash.com/photo-1625750188088-f6cd6756349c?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1563297007-0686b7003af7?w=800&h=800&fit=crop&crop=center'
+        ],
         specs: {
           'DPI': '16000',
           'Connectivity': 'Wireless 2.4GHz',
@@ -105,6 +121,111 @@ class MockDatabase {
         description: 'High-precision wireless gaming mouse with customizable RGB lighting.',
         createdAt: new Date('2024-02-15'),
         updatedAt: new Date('2024-02-15')
+      },
+      {
+        id: 'p_6',
+        title: 'USB-C Hub',
+        priceCents: 8999,
+        tags: ['electronics', 'accessories', 'connectivity'],
+        rating: 4.6,
+        images: [
+          'https://images.unsplash.com/photo-1616578273461-3a99ce422de6?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1760376789478-c1023d2dc007?w=800&h=800&fit=crop&crop=center'
+        ],
+        specs: {
+          'Ports': 'HDMI, USB-A x3, USB-C, SD/TF card readers',
+          'Compatibility': 'MacBook, Windows laptops, tablets',
+          'Material': 'Aluminum housing',
+          'Features': '4K HDMI output, fast charging'
+        },
+        stock: 15,
+        description: 'Premium USB-C hub with multiple ports for laptops and tablets, featuring 4K HDMI output and fast charging.',
+        createdAt: new Date('2024-02-20'),
+        updatedAt: new Date('2024-02-20')
+      },
+      {
+        id: 'p_7',
+        title: 'Ergonomic Office Chair',
+        priceCents: 39999,
+        tags: ['furniture', 'office', 'ergonomic'],
+        rating: 4.6,
+        images: [
+          'https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800&h=800&fit=crop&crop=center'
+        ],
+        specs: {
+          'Material': 'Mesh Back, Leather Seat',
+          'Adjustable': 'Height, Armrests, Lumbar Support',
+          'Weight Capacity': '300 lbs',
+          'Warranty': '5 years'
+        },
+        stock: 3,
+        description: 'Premium ergonomic office chair designed for all-day comfort and productivity.',
+        createdAt: new Date('2024-02-25'),
+        updatedAt: new Date('2024-02-25')
+      },
+      {
+        id: 'p_8',
+        title: 'Wireless Charging Pad',
+        priceCents: 2999,
+        tags: ['electronics', 'charging', 'wireless'],
+        rating: 4.1,
+        images: [
+          'https://images.unsplash.com/photo-1591290619618-904f6dd935e3?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1568246387285-527f42cd0833?w=800&h=800&fit=crop&crop=center'
+        ],
+        specs: {
+          'Power Output': '15W Fast Charging',
+          'Compatibility': 'Qi-enabled devices',
+          'Material': 'Silicone, LED indicator',
+          'Safety': 'Overcharge protection'
+        },
+        stock: 18,
+        description: 'Fast wireless charging pad with LED indicator and universal Qi compatibility.',
+        createdAt: new Date('2024-03-01'),
+        updatedAt: new Date('2024-03-01')
+      },
+      {
+        id: 'p_9',
+        title: 'Bluetooth Speaker',
+        priceCents: 7999,
+        tags: ['electronics', 'audio', 'portable'],
+        rating: 4.3,
+        images: [
+          'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1589256469067-ea99122bbdc4?w=800&h=800&fit=crop&crop=center'
+        ],
+        specs: {
+          'Battery Life': '12 hours',
+          'Connectivity': 'Bluetooth 5.0',
+          'Water Resistance': 'IPX7',
+          'Sound': '360-degree audio'
+        },
+        stock: 22,
+        description: 'Portable Bluetooth speaker with 360-degree sound and waterproof design.',
+        createdAt: new Date('2024-03-05'),
+        updatedAt: new Date('2024-03-05')
+      },
+      {
+        id: 'p_10',
+        title: 'LED Desk Lamp',
+        priceCents: 7999,
+        tags: ['furniture', 'office', 'lighting'],
+        rating: 4.7,
+        images: [
+          'https://images.unsplash.com/photo-1708513427809-728a7913fc9f?w=800&h=800&fit=crop&crop=center',
+          'https://images.unsplash.com/photo-1623678624314-c3efb63fb2d2?w=800&h=800&fit=crop&crop=center'
+        ],
+        specs: {
+          'Light Type': 'LED with adjustable brightness',
+          'Color Temperature': '3000K-6000K adjustable',
+          'Material': 'Aluminum and plastic',
+          'Features': 'Touch control, USB charging port, flexible arm'
+        },
+        stock: 12,
+        description: 'Modern LED desk lamp with adjustable brightness and color temperature, featuring touch controls and USB charging port.',
+        createdAt: new Date('2024-03-10'),
+        updatedAt: new Date('2024-03-10')
       }
     ];
 
@@ -142,6 +263,19 @@ class MockDatabase {
     // Seed users
     this.users = [
       {
+        id: 'demo_user',
+        name: 'Demo User',
+        email: 'demo@example.com',
+        avatarUrl: '/avatars/demo.jpg',
+        preferences: {
+          favoriteCategories: ['electronics', 'gaming'],
+          notifications: true,
+          theme: 'light'
+        },
+        starredProducts: [],
+        createdAt: new Date('2024-01-01')
+      },
+      {
         id: 'u_1',
         name: 'John Doe',
         email: 'john@example.com',
@@ -151,6 +285,7 @@ class MockDatabase {
           notifications: true,
           theme: 'light'
         },
+        starredProducts: [],
         createdAt: new Date('2024-01-01')
       },
       {
@@ -163,6 +298,7 @@ class MockDatabase {
           notifications: false,
           theme: 'dark'
         },
+        starredProducts: [],
         createdAt: new Date('2024-01-05')
       }
     ];
@@ -308,6 +444,49 @@ class MockDatabase {
 
     user.preferences = { ...user.preferences, ...preferences };
     return user;
+  }
+
+  // Starred products operations
+  async getStarredProducts(userId: string): Promise<Product[]> {
+    const user = await this.getUser(userId);
+    if (!user) {
+      return [];
+    }
+
+    return this.products.filter(product => 
+      user.starredProducts.includes(product.id)
+    );
+  }
+
+  async addToStarred(userId: string, productId: string): Promise<boolean> {
+    const user = await this.getUser(userId);
+    if (!user) {
+      return false;
+    }
+
+    if (!user.starredProducts.includes(productId)) {
+      user.starredProducts.push(productId);
+    }
+    return true;
+  }
+
+  async removeFromStarred(userId: string, productId: string): Promise<boolean> {
+    const user = await this.getUser(userId);
+    if (!user) {
+      return false;
+    }
+
+    user.starredProducts = user.starredProducts.filter(id => id !== productId);
+    return true;
+  }
+
+  async isProductStarred(userId: string, productId: string): Promise<boolean> {
+    const user = await this.getUser(userId);
+    if (!user) {
+      return false;
+    }
+
+    return user.starredProducts.includes(productId);
   }
 }
 
