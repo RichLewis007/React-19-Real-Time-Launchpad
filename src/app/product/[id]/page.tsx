@@ -7,10 +7,12 @@ import Link from "next/link";
 import Image from "next/image";
 import AddToCartForm from "./AddToCartForm.client";
 
+// This page handles dynamic params with async params
+
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 async function ProductReviews({ productId }: { productId: string }) {
@@ -76,7 +78,8 @@ function ReviewsSkeleton() {
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await db.getProduct(params.id);
+  const { id } = await params;
+  const product = await db.getProduct(id);
 
   if (!product) {
     return (

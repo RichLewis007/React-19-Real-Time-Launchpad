@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { ActionState } from "@/lib/types";
 
 export async function updateQuantity(
@@ -31,6 +31,11 @@ export async function updateQuantity(
     }
 
     await db.updateCartItem(userId, productId, quantity);
+    
+    // Next.js 16: Use updateTag for immediate cache updates
+    updateTag(`cart-${userId}`);
+    updateTag(`product-${productId}`);
+    
     revalidatePath("/cart");
 
     return { 

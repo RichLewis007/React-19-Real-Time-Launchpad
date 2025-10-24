@@ -1,4 +1,5 @@
-# Real-Time Launchpad React 19 demo app
+# Real-Time Launchpad 
+A React 19 demo app.
 
 Hey there! I'm Rich Lewis, and this is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and show how they work together in a real application.
 
@@ -7,6 +8,22 @@ Hey there! I'm Rich Lewis, and this is my take on what e-commerce could look lik
 I've been an active user of React since its early days, and have been closely following React's evolution. When React 19 came out, I wanted to build something that uses and demonstrates to students of React all of the cool new features. So I created this e-commerce demo that showcases Server Components, Suspense streaming, Server Actions, and optimistic updates in action.
 
 Be sure to check out the [Educational Guides](#-educational-guides) section in this README to see how you can learn from this demo.
+
+## 📸 Screenshots
+
+Here's what the app looks like in action:
+
+<div align="center">
+
+| Home Page | Search Page |
+|-----------|-------------|
+| <img src="./assets/home-page-top.jpg" alt="Home Page" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> | <img src="./assets/search-page.jpg" alt="Search Page" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> |
+
+| Admin Panel (Top) | Admin Panel (Bottom) |
+|-------------------|---------------------|
+| <img src="./assets/admin-page-top.jpg" alt="Admin Panel Top" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> | <img src="./assets/admin-page-bottom.jpg" alt="Admin Panel Bottom" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> |
+
+</div>
 
 ## What's does this demo app include?
 
@@ -31,8 +48,9 @@ Be sure to check out the [Educational Guides](#-educational-guides) section in t
 ## Tech choices
 
 I went with:
-- **Next.js 15** with the App Router (because it's the future)
-- **React 19** with the new compiler
+- **Next.js 16** with the App Router and Cache Components (latest and greatest)
+- **React 19.2** with the new compiler and latest features
+- **Turbopack** as the default bundler (2-5x faster builds)
 - **TypeScript** (because I like my code to work)
 - **Tailwind CSS** (because styling should be fast)
 - **Lucide React** for icons
@@ -168,6 +186,7 @@ One of my main goals with any project I share is to help other developers learn.
 
 ### 📚 Educational Guides
 
+- **[Next.js 16 Features](./docs/nextjs-16-features.md)** - Complete guide to Next.js 16 new features and best practices
 - **[React 19 Deep Dive](./docs/react-19-features.md)** - Everything you need to know about the new React features I used
 - **[Server Components Explained](./docs/server-components.md)** - How server-side rendering works in Next.js and why it matters
 - **[Concurrent Rendering Guide](./docs/concurrent-rendering.md)** - Understanding useTransition, useDeferredValue, and non-blocking updates
@@ -189,7 +208,7 @@ Every major component and function is thoroughly documented with inline comments
 
 ## Thanks
 
-Built with React 19, Next.js 15, and Tailwind CSS. Icons from Lucide.
+Built with React 19, Next.js 16, and Tailwind CSS. Icons from Lucide.
 
 **Images**: All product images are provided by [Unsplash](https://unsplash.com) - a beautiful, free photos site powered by creators everywhere. See [Credits](./docs/credits.md) for detailed image attributions.
 

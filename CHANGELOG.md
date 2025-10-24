@@ -8,14 +8,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Next.js 16 Migration**: Complete upgrade to Next.js 16 with all new features
+- **Cache Components**: Implemented explicit caching control with "use cache" directive
+- **Enhanced Caching APIs**: Added updateTag(), refresh(), and improved revalidateTag() usage
+- **Turbopack Integration**: Enabled stable Turbopack bundler with filesystem caching
+- **Proxy.ts Implementation**: Replaced middleware.ts with proxy.ts for clearer network boundaries
+- **Async Request APIs**: Updated all synchronous APIs to async (params, searchParams, cookies, headers)
+- **Next.js 16 Documentation**: Comprehensive guide to Next.js 16 features and best practices
 - Enhanced navigation with shopping cart icon and improved visual hierarchy
 - Gentle drift animations for hero banner decorative elements
 - Improved hero banner color scheme with reduced pink tones
 
 ### Changed
+- **Configuration**: Updated next.config.ts with Next.js 16 features and optimizations
+- **Server Actions**: Enhanced with new caching APIs for better user experience
+- **Product Pages**: Updated to use async params for Next.js 16 compatibility
+- **Caching Strategy**: Implemented read-your-writes semantics with updateTag()
 - Updated hero banner gradient from purple-pink-orange to purple-blue-orange
 - Replaced harsh blinking animations with smooth, organic drift movements
 - Enhanced Cart link styling with distinctive blue background and icon
+
+### Technical Improvements
+- **Performance**: 2-5x faster builds with Turbopack
+- **Development Experience**: Up to 10x faster Fast Refresh
+- **Caching**: More explicit and flexible cache control
+- **Security**: Enhanced security headers via proxy.ts
+- **Type Safety**: Full TypeScript support for all new APIs
 
 ## [0.4.0] - 2025-10-24
 

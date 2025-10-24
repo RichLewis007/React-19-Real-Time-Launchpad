@@ -19,7 +19,7 @@ export function OptimisticStar({
   const [isPending, startTransition] = useTransition();
   const [starred, setStarred] = useOptimistic(
     initialStarred,
-    (currentState, optimisticValue) => optimisticValue
+    (currentState: boolean, optimisticValue: boolean) => optimisticValue
   );
 
   const handleToggle = () => {

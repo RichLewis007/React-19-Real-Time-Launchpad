@@ -38,7 +38,7 @@ Icons used throughout the application are provided by [Lucide](https://lucide.de
 ## Technology Stack
 
 - **React 19**: [React](https://react.dev/)
-- **Next.js 15**: [Next.js](https://nextjs.org/)
+- **Next.js 16**: [Next.js](https://nextjs.org/)
 - **TypeScript**: [TypeScript](https://www.typescriptlang.org/)
 - **Tailwind CSS**: [Tailwind CSS](https://tailwindcss.com/)
 

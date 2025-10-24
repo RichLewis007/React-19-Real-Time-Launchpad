@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, updateTag } from "next/cache";
 import { ActionState } from "@/lib/types";
 
 export async function addToCart(
@@ -31,6 +31,13 @@ export async function addToCart(
     }
 
     await db.addToCart(userId, productId, quantity);
+    
+    // Next.js 16: Use updateTag for read-your-writes semantics
+    // This ensures the user sees their changes immediately
+    updateTag(`cart-${userId}`);
+    updateTag(`product-${productId}`);
+    
+    // Also revalidate paths for immediate UI updates
     revalidatePath("/cart");
     revalidatePath("/");
 

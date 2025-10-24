@@ -78,9 +78,9 @@ export default function RootLayout({
             <footer className="bg-white border-t">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="text-center text-gray-600">
-                  <p>Real-Time Launchpad - Demonstrating React 19 & Next.js Features</p>
+                  <p>Real-Time Launchpad - Demonstrating React 19 & Next.js 16 Features</p>
                   <p className="text-sm mt-2">
-                    Built by Rich Lewis with React 19, Next.js 15, Server Components, Suspense, and Actions
+                    Built by Rich Lewis with React 19, Next.js 16, Server Components, Suspense, and Actions
                   </p>
                   <p className="text-xs mt-2 text-gray-500">
                     Images by <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">Unsplash</a>

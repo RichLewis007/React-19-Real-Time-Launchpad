@@ -1,6 +1,7 @@
 import { formatPrice } from "@/lib/utils";
 import { CheckCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface SuccessPageProps {
   searchParams: Promise<{
@@ -9,13 +10,56 @@ interface SuccessPageProps {
   }>;
 }
 
-export default async function CheckoutSuccessPage({ searchParams }: SuccessPageProps) {
+// This page handles dynamic searchParams with Suspense
+
+async function OrderDetails({ searchParams }: SuccessPageProps) {
   const { orderId, total } = await searchParams;
   const totalAmount = total ? parseInt(total) : 0;
   
-  // Debug logging
-  console.log('Success page received:', { orderId, total, totalAmount });
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md mx-auto">
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Details</h2>
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <span className="text-gray-600">Order ID:</span>
+          <span className="font-medium">{orderId || "N/A"}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">Total:</span>
+          <span className="font-medium">{formatPrice(totalAmount)}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-600">Status:</span>
+          <span className="text-green-600 font-medium">Confirmed</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
+function OrderDetailsSkeleton() {
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md mx-auto animate-pulse">
+      <div className="h-6 bg-gray-200 rounded mb-4"></div>
+      <div className="space-y-2">
+        <div className="flex justify-between">
+          <div className="h-4 bg-gray-200 rounded w-16"></div>
+          <div className="h-4 bg-gray-200 rounded w-20"></div>
+        </div>
+        <div className="flex justify-between">
+          <div className="h-4 bg-gray-200 rounded w-12"></div>
+          <div className="h-4 bg-gray-200 rounded w-16"></div>
+        </div>
+        <div className="flex justify-between">
+          <div className="h-4 bg-gray-200 rounded w-14"></div>
+          <div className="h-4 bg-gray-200 rounded w-20"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default async function CheckoutSuccessPage({ searchParams }: SuccessPageProps) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="text-center">
@@ -27,23 +71,9 @@ export default async function CheckoutSuccessPage({ searchParams }: SuccessPageP
           Thank you for your purchase. Your order has been confirmed.
         </p>
 
-        <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md mx-auto">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Details</h2>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Order ID:</span>
-              <span className="font-medium">{orderId || "N/A"}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Total:</span>
-              <span className="font-medium">{formatPrice(totalAmount)}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Status:</span>
-              <span className="text-green-600 font-medium">Confirmed</span>
-            </div>
-          </div>
-        </div>
+        <Suspense fallback={<OrderDetailsSkeleton />}>
+          <OrderDetails searchParams={searchParams} />
+        </Suspense>
 
         <div className="space-y-4">
           <p className="text-gray-600">

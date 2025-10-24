@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react";
 import ProductList from "@/components/ProductList";
 import { simulateSlowResponse, getSlowMode } from "@/lib/slow";
+import { Product } from "@/lib/types";
 
 interface SearchResultsProps {
   query: string;
 }
 
 export default function SearchResults({ query }: SearchResultsProps) {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [starredProductIds, setStarredProductIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
