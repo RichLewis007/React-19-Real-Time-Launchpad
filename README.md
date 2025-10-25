@@ -2,6 +2,15 @@
   <img src="./assets/banner-830-314.jpg" alt="Real-Time Launchpad Banner" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
 </div>
 
+<div align="center">
+
+![Build Status](https://github.com/RichLewis007/React-19-Real-Time-Launchpad/workflows/CI/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![React](https://img.shields.io/badge/React-19.2-blue)
+
+</div>
+
 # React 19 Real-Time Launchpad 
 An educational app with extensive discussion of features used.
 
@@ -65,8 +74,8 @@ I went with:
 You'll want React 19 as we're showing off some of its features.
 
 ```bash
-git clone <your-repo-url>
-cd realtime-launchpad
+git clone git@github.com:RichLewis007/React-19-Real-Time-Launchpad.git
+cd React-19-Real-Time-Launchpad
 npm install
 npm run dev
 ```
@@ -174,15 +183,34 @@ I've been testing this and it's pretty fast:
 
 ## Contributing
 
-If you want to contribute:
-1. Fork it
-2. Create a branch
+We welcome contributions from the community! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+
+- How to get started
+- Our coding standards
+- How to submit pull requests
+- Our Code of Conduct
+
+Quick start:
+1. Fork the repository
+2. Create a feature branch
 3. Make your changes
-4. Submit a PR
+4. Submit a pull request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for complete guidelines.
 
 ## License
 
 MIT License - feel free to use this however you want.
+
+See [LICENSE](LICENSE) for the full license text.
+
+## Security
+
+For security vulnerabilities, please see our [Security Policy](SECURITY.md).
+
+## Code of Conduct
+
+This project follows a [Code of Conduct](CODE_OF_CONDUCT.md). Please read it to understand our expectations for contributors.
 
 ## Learning Resources
 

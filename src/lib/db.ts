@@ -35,8 +35,8 @@ class MockDatabase {
         },
         stock: 25,
         description: 'Premium wireless headphones with active noise cancellation and superior sound quality.',
-        createdAt: new Date('2024-01-15'),
-        updatedAt: new Date('2024-01-15')
+        createdAt: new Date('2025-01-15'),
+        updatedAt: new Date('2025-01-15')
       },
       {
         id: 'p_2',
@@ -56,8 +56,8 @@ class MockDatabase {
         },
         stock: 15,
         description: 'Advanced fitness tracking with comprehensive health monitoring and GPS capabilities.',
-        createdAt: new Date('2024-01-20'),
-        updatedAt: new Date('2024-01-20')
+        createdAt: new Date('2025-01-20'),
+        updatedAt: new Date('2025-01-20')
       },
       {
         id: 'p_3',
@@ -77,8 +77,8 @@ class MockDatabase {
         },
         stock: 8,
         description: 'Professional mechanical keyboard with RGB backlighting and premium switches.',
-        createdAt: new Date('2024-02-01'),
-        updatedAt: new Date('2024-02-01')
+        createdAt: new Date('2025-02-01'),
+        updatedAt: new Date('2025-02-01')
       },
       {
         id: 'p_4',
@@ -98,8 +98,8 @@ class MockDatabase {
         },
         stock: 5,
         description: 'Stunning 4K monitor with wide color gamut and professional-grade color accuracy.',
-        createdAt: new Date('2024-02-10'),
-        updatedAt: new Date('2024-02-10')
+        createdAt: new Date('2025-02-10'),
+        updatedAt: new Date('2025-02-10')
       },
       {
         id: 'p_5',
@@ -119,8 +119,8 @@ class MockDatabase {
         },
         stock: 20,
         description: 'High-precision wireless gaming mouse with customizable RGB lighting.',
-        createdAt: new Date('2024-02-15'),
-        updatedAt: new Date('2024-02-15')
+        createdAt: new Date('2025-02-15'),
+        updatedAt: new Date('2025-02-15')
       },
       {
         id: 'p_6',
@@ -140,8 +140,8 @@ class MockDatabase {
         },
         stock: 15,
         description: 'Premium USB-C hub with multiple ports for laptops and tablets, featuring 4K HDMI output and fast charging.',
-        createdAt: new Date('2024-02-20'),
-        updatedAt: new Date('2024-02-20')
+        createdAt: new Date('2025-02-20'),
+        updatedAt: new Date('2025-02-20')
       },
       {
         id: 'p_7',
@@ -161,8 +161,8 @@ class MockDatabase {
         },
         stock: 3,
         description: 'Premium ergonomic office chair designed for all-day comfort and productivity.',
-        createdAt: new Date('2024-02-25'),
-        updatedAt: new Date('2024-02-25')
+        createdAt: new Date('2025-02-25'),
+        updatedAt: new Date('2025-02-25')
       },
       {
         id: 'p_8',
@@ -182,8 +182,8 @@ class MockDatabase {
         },
         stock: 18,
         description: 'Fast wireless charging pad with LED indicator and universal Qi compatibility.',
-        createdAt: new Date('2024-03-01'),
-        updatedAt: new Date('2024-03-01')
+        createdAt: new Date('2025-03-01'),
+        updatedAt: new Date('2025-03-01')
       },
       {
         id: 'p_9',
@@ -203,8 +203,8 @@ class MockDatabase {
         },
         stock: 22,
         description: 'Portable Bluetooth speaker with 360-degree sound and waterproof design.',
-        createdAt: new Date('2024-03-05'),
-        updatedAt: new Date('2024-03-05')
+        createdAt: new Date('2025-03-05'),
+        updatedAt: new Date('2025-03-05')
       },
       {
         id: 'p_10',
@@ -224,8 +224,8 @@ class MockDatabase {
         },
         stock: 12,
         description: 'Modern LED desk lamp with adjustable brightness and color temperature, featuring touch controls and USB charging port.',
-        createdAt: new Date('2024-03-10'),
-        updatedAt: new Date('2024-03-10')
+        createdAt: new Date('2025-03-10'),
+        updatedAt: new Date('2025-03-10')
       }
     ];
 
@@ -237,7 +237,7 @@ class MockDatabase {
         userId: 'u_1',
         body: 'Excellent sound quality and comfortable to wear for long periods.',
         stars: 5,
-        createdAt: new Date('2024-01-20'),
+        createdAt: new Date('2025-01-20'),
         helpful: 12
       },
       {
@@ -246,7 +246,7 @@ class MockDatabase {
         userId: 'u_2',
         body: 'Good headphones but the battery life could be better.',
         stars: 4,
-        createdAt: new Date('2024-01-25'),
+        createdAt: new Date('2025-01-25'),
         helpful: 8
       },
       {
@@ -255,7 +255,7 @@ class MockDatabase {
         userId: 'u_3',
         body: 'Great fitness tracker with accurate heart rate monitoring.',
         stars: 4,
-        createdAt: new Date('2024-01-30'),
+        createdAt: new Date('2025-01-30'),
         helpful: 15
       }
     ];
@@ -273,7 +273,7 @@ class MockDatabase {
           theme: 'light'
         },
         starredProducts: [],
-        createdAt: new Date('2024-01-01')
+        createdAt: new Date('2025-01-01')
       },
       {
         id: 'u_1',
@@ -286,7 +286,7 @@ class MockDatabase {
           theme: 'light'
         },
         starredProducts: [],
-        createdAt: new Date('2024-01-01')
+        createdAt: new Date('2025-01-01')
       },
       {
         id: 'u_2',
@@ -299,7 +299,7 @@ class MockDatabase {
           theme: 'dark'
         },
         starredProducts: [],
-        createdAt: new Date('2024-01-05')
+        createdAt: new Date('2025-01-05')
       }
     ];
   }
