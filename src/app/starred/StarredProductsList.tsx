@@ -20,7 +20,7 @@ export default function StarredProductsList({
 }: StarredProductsListProps) {
   const [products, setProducts] = useState(initialProducts);
   const [isPending, startTransition] = useTransition();
-  const [addToCartState, addToCartAction] = useActionState(addToCart, { ok: false });
+  const [, addToCartAction] = useActionState(addToCart, { ok: false });
 
   const handleRemoveFromStarred = (productId: string) => {
     startTransition(async () => {

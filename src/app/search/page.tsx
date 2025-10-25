@@ -16,7 +16,7 @@ export default function SearchPage() {
           Search Products
         </h1>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Experience real-time search with React 19's useTransition and useDeferredValue for smooth, responsive interactions.
+          Experience real-time search with React 19&apos;s useTransition and useDeferredValue for smooth, responsive interactions.
         </p>
       </div>
 

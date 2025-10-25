@@ -1,4 +1,4 @@
-import { Product, Review, User, Cart, CartItem } from './types';
+import { Product, Review, User, Cart } from './types';
 
 // Mock database implementation
 // In a real app, this would connect to a proper database

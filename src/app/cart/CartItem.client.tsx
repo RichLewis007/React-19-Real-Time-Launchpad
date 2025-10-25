@@ -2,7 +2,6 @@
 
 import { useActionState } from "react";
 import { updateQuantity } from "@/actions/updateQuantity";
-import FormButton from "@/components/FormButton.client";
 import { formatPrice } from "@/lib/utils";
 import { Product, CartItem as CartItemType } from "@/lib/types";
 import { Trash2, Minus, Plus } from "lucide-react";
@@ -18,6 +17,7 @@ export default function CartItem({ item, product }: CartItemProps) {
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
       <div className="flex items-center space-x-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.images[0] || "/placeholder-product.svg"}
           alt={product.title}

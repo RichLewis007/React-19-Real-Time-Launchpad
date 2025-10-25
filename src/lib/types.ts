@@ -61,6 +61,7 @@ export interface SearchFilters {
   inStock?: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ActionState<T = any> {
   ok: boolean;
   error?: string;

@@ -3,7 +3,6 @@ import { db } from "@/lib/db";
 import ProductList from "@/components/ProductList";
 import { ErrorBoundary } from "@/components/ErrorBoundary.client";
 import { TrendingUp, Sparkles, Loader2 } from "lucide-react";
-import Image from "next/image";
 
 // Server Component for trending products
 async function TrendingProducts() {
@@ -95,7 +94,7 @@ export default function Home() {
                 Real-Time Launchpad
               </h1>
               <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-white/90 leading-relaxed">
-                Experience the future of e-commerce with React 19's latest features: 
+                Experience the future of e-commerce with React 19&apos;s latest features: 
                 <span className="font-semibold text-yellow-200"> Server Components</span>, 
                 <span className="font-semibold text-cyan-200"> Suspense streaming</span>, and 
                 <span className="font-semibold text-pink-200"> optimistic updates</span>.

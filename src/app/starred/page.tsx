@@ -10,7 +10,7 @@ export default async function StarredPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">Your Favorites</h1>
         <p className="text-gray-600">
-          Products you've starred for easy access
+          Products you&apos;ve starred for easy access
         </p>
       </div>
 

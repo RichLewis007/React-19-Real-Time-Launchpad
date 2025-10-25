@@ -261,3 +261,5 @@ lib-cov
 .pnp.js
 /.pnp
 next-env.d.ts
+.DS_Store
+**/.DS_Store

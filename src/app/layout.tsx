@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 import { ErrorBoundary } from "@/components/ErrorBoundary.client";
 import { ShoppingCart } from "lucide-react";
@@ -47,25 +48,25 @@ export default function RootLayout({
                     </h1>
                   </div>
                   <nav className="hidden md:flex space-x-8">
-                    <a href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                       Home
-                    </a>
-                    <a href="/search" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    </Link>
+                    <Link href="/search" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                       Search
-                    </a>
-                    <a href="/starred" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    </Link>
+                    <Link href="/starred" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                       Favorites
-                    </a>
-                    <a href="/cart" className="flex items-center gap-2 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold border border-blue-200 transition-all duration-200">
+                    </Link>
+                    <Link href="/cart" className="flex items-center gap-2 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold border border-blue-200 transition-all duration-200">
                       <ShoppingCart className="h-4 w-4" />
                       Cart
-                    </a>
-                    <a href="/profile" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    </Link>
+                    <Link href="/profile" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                       Profile
-                    </a>
-                    <a href="/admin" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    </Link>
+                    <Link href="/admin" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
                       Admin
-                    </a>
+                    </Link>
                   </nav>
                 </div>
               </div>

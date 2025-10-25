@@ -38,7 +38,9 @@ export default function ProductCard({ product, initialStarred = false }: Product
   
   // useId generates unique IDs for form elements to avoid conflicts
   // This is especially important when multiple ProductCards are rendered
-  const formId = useId();
+  // Note: Currently unused but kept for future use
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _formId = useId();
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">

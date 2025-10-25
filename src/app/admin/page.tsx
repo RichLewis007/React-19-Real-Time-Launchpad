@@ -1,19 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Settings, Zap, Bug, Database, Monitor } from "lucide-react";
+import { useState } from "react";
+import { Settings, Zap, Bug, Monitor } from "lucide-react";
 
 export default function AdminPage() {
-  const [slowMode, setSlowMode] = useState(false);
-  const [errorMode, setErrorMode] = useState(false);
-
-  useEffect(() => {
-    // Load settings from localStorage
-    const savedSlowMode = localStorage.getItem('slowMode') === 'true';
-    const savedErrorMode = localStorage.getItem('errorMode') === 'true';
-    setSlowMode(savedSlowMode);
-    setErrorMode(savedErrorMode);
-  }, []);
+  const [slowMode, setSlowMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('slowMode') === 'true';
+    }
+    return false;
+  });
+  
+  const [errorMode, setErrorMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('errorMode') === 'true';
+    }
+    return false;
+  });
 
   const toggleSlowMode = () => {
     const newSlowMode = !slowMode;

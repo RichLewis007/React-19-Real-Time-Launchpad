@@ -17,7 +17,9 @@ export default function ClientSearchBox({
 }: ClientSearchBoxProps) {
   const [text, setText] = useState("");
   const [isPending, startTransition] = useTransition();
-  const deferredQuery = useDeferredValue(text);
+  
+  // Get deferred value to smooth out rapid input changes
+  useDeferredValue(text);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const query = e.target.value;

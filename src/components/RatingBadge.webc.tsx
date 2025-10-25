@@ -37,7 +37,9 @@ export default function RatingBadge({ rating, size = 'small', color = 'yellow' }
 }
 
 // Declare the custom element for TypeScript
+// This namespace declaration is required for TypeScript to recognize custom elements
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
     interface IntrinsicElements {
       'rating-badge': {
