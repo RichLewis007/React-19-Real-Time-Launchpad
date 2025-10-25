@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
 import { ErrorBoundary } from "@/components/ErrorBoundary.client";
-import { ShoppingCart } from "lucide-react";
+import Navigation from "@/components/Navigation.client";
+import { db } from "@/lib/db";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +34,22 @@ export const viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Get initial counts for cart and favorites
+  const userId = "demo_user";
+  const [cart, starredProducts] = await Promise.all([
+    db.getCart(userId),
+    db.getStarredProducts(userId),
+  ]);
+
+  const cartCount =
+    cart?.items.reduce((sum, item) => sum + item.quantity, 0) ?? 0;
+  const favoritesCount = starredProducts.length;
+
   return (
     <html lang="en">
       <body
@@ -54,45 +65,10 @@ export default function RootLayout({
                       Real-Time Launchpad
                     </h1>
                   </div>
-                  <nav className="hidden md:flex space-x-8">
-                    <Link
-                      href="/"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Home
-                    </Link>
-                    <Link
-                      href="/search"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Search
-                    </Link>
-                    <Link
-                      href="/starred"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Favorites
-                    </Link>
-                    <Link
-                      href="/cart"
-                      className="flex items-center gap-2 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold border border-blue-200 transition-all duration-200"
-                    >
-                      <ShoppingCart className="h-4 w-4" />
-                      Cart
-                    </Link>
-                    <Link
-                      href="/profile"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Profile
-                    </Link>
-                    <Link
-                      href="/admin"
-                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      Admin
-                    </Link>
-                  </nav>
+                  <Navigation
+                    initialCartCount={cartCount}
+                    initialFavoritesCount={favoritesCount}
+                  />
                 </div>
               </div>
             </header>
