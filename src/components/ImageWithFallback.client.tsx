@@ -10,6 +10,7 @@ interface ImageWithFallbackProps {
   height: number;
   className?: string;
   fallbackSrc?: string;
+  loading?: "lazy" | "eager";
 }
 
 export default function ImageWithFallback({
@@ -19,6 +20,7 @@ export default function ImageWithFallback({
   height,
   className,
   fallbackSrc = "/placeholder-product.svg",
+  loading = "lazy",
 }: ImageWithFallbackProps) {
   const [imgSrc, setImgSrc] = useState(src);
 
@@ -34,6 +36,7 @@ export default function ImageWithFallback({
       height={height}
       className={className}
       onError={handleError}
+      loading={loading}
     />
   );
 }
