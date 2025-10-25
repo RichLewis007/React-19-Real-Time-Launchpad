@@ -1,8 +1,8 @@
 <div align="center">
-  <img src="./assets/banner.jpg" alt="Real-Time Launchpad Banner" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+  <img src="./assets/banner-830-314.jpg" alt="Real-Time Launchpad Banner" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
 </div>
 
-# Real-Time Launchpad 
+# React 19 Real-Time Launchpad 
 A React 19 demo app.
 
 Hey there! I'm Rich Lewis, and this is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and show how they work together in a real application.
