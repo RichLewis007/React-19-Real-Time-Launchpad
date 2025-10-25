@@ -3,9 +3,9 @@
 </div>
 
 # React 19 Real-Time Launchpad 
-A React 19 demo app.
+An educational app with extensive discussion of features used.
 
-Hey there! I'm Rich Lewis, and this is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and show how they work together in a real application.
+This is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and show how they work together in a real application.
 
 ## What's this about?
 
