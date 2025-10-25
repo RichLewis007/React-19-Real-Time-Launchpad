@@ -4,6 +4,7 @@ import "./globals.css";
 import { ErrorBoundary } from "@/components/ErrorBoundary.client";
 import Navigation from "@/components/Navigation.client";
 import { CartProvider } from "@/components/CartProvider";
+import ConsoleGreeting from "@/components/ConsoleGreeting.client";
 import { db } from "@/lib/db";
 
 const geistSans = Geist({
@@ -60,6 +61,7 @@ export default async function RootLayout({
         data-cart-count={cartCount}
         data-favorites-count={favoritesCount}
       >
+        <ConsoleGreeting />
         <ErrorBoundary>
           <CartProvider
             initialCartCount={cartCount}

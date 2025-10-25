@@ -25,6 +25,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Fix for -webkit-text-size-adjust warning */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 /* Custom animations */
 @keyframes pulse {
   0%,
