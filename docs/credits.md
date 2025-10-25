@@ -5,6 +5,7 @@
 All product images and hero images used in this application are provided by [Unsplash](https://unsplash.com).
 
 ### About Unsplash
+
 Unsplash is a beautiful, free photos site powered by creators everywhere. All photos on Unsplash are free to use under the [Unsplash License](https://unsplash.com/license).
 
 ### Image Credits
@@ -12,9 +13,11 @@ Unsplash is a beautiful, free photos site powered by creators everywhere. All ph
 The following Unsplash images are used in this application:
 
 #### Hero Image
+
 - **Modern e-commerce showcase**: [Photo by Unsplash](https://unsplash.com/photos/photo-1460925895917-afdab827c52f) - Business and technology workspace
 
 #### Product Images
+
 Each product uses multiple images for different views (main product card image + additional detail page images):
 
 - **Wireless Bluetooth Headphones**: [Primary](https://unsplash.com/photos/photo-1505740420928-5e560c06d30e) - Black wireless headphones | [Secondary](https://unsplash.com/photos/photo-1741770067276-a10e15ff5197) - Headphones detail
@@ -29,6 +32,7 @@ Each product uses multiple images for different views (main product card image +
 - **LED Desk Lamp**: [Primary](https://unsplash.com/photos/photo-1708513427809-728a7913fc9f) - Modern desk lamp | [Secondary](https://unsplash.com/photos/photo-1623678624314-c3efb63fb2d2) - LED lamp on desk
 
 ### License
+
 All images are used under the [Unsplash License](https://unsplash.com/license), which allows for free use including commercial use, with attribution appreciated but not required.
 
 ## Icons
@@ -48,4 +52,4 @@ Icons used throughout the application are provided by [Lucide](https://lucide.de
 
 ---
 
-*This application is built for educational purposes to demonstrate modern React development patterns and best practices.*
+_This application is built for educational purposes to demonstrate modern React development patterns and best practices._

@@ -11,13 +11,13 @@ import ImageWithFallback from "./ImageWithFallback.client";
 
 /**
  * ProductCard Component
- * 
+ *
  * This component demonstrates several key React 19 patterns:
  * 1. Server Actions integration with useActionState
  * 2. Optimistic updates for the star/favorite functionality
  * 3. Form handling without traditional API endpoints
  * 4. Responsive design with Tailwind CSS
- * 
+ *
  * Why I built it this way:
  * - useActionState provides built-in loading states and error handling
  * - OptimisticStar shows immediate feedback while server processes the request
@@ -30,12 +30,15 @@ interface ProductCardProps {
   initialStarred?: boolean;
 }
 
-export default function ProductCard({ product, initialStarred = false }: ProductCardProps) {
+export default function ProductCard({
+  product,
+  initialStarred = false,
+}: ProductCardProps) {
   // useActionState is a React 19 hook that manages form state for Server Actions
   // It provides the current state and an action function that can be used in forms
   // The second parameter is the initial state
   const [state, formAction] = useActionState(addToCart, { ok: false });
-  
+
   // useId generates unique IDs for form elements to avoid conflicts
   // This is especially important when multiple ProductCards are rendered
   // Note: Currently unused but kept for future use
@@ -58,8 +61,8 @@ export default function ProductCard({ product, initialStarred = false }: Product
         {/* OptimisticStar demonstrates React 19's optimistic updates pattern */}
         {/* It shows immediate feedback when clicked, then reverts if the server request fails */}
         <div className="absolute top-2 right-2">
-          <OptimisticStar 
-            productId={product.id} 
+          <OptimisticStar
+            productId={product.id}
             initialStarred={initialStarred}
             className="bg-white/80 backdrop-blur-sm"
           />
@@ -71,7 +74,7 @@ export default function ProductCard({ product, initialStarred = false }: Product
         <h3 className="font-semibold text-lg text-gray-900 mb-2 line-clamp-2">
           {product.title}
         </h3>
-        
+
         <div className="flex items-center mb-2">
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
@@ -118,7 +121,7 @@ export default function ProductCard({ product, initialStarred = false }: Product
           {/* Hidden inputs provide data to the Server Action */}
           <input type="hidden" name="productId" value={product.id} />
           <input type="hidden" name="userId" value="demo_user" />
-          
+
           <div className="flex items-center space-x-2">
             <input
               type="number"
@@ -135,7 +138,9 @@ export default function ProductCard({ product, initialStarred = false }: Product
               className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors flex items-center justify-center space-x-2"
             >
               <ShoppingCart className="h-4 w-4" />
-              <span>{product.stock === 0 ? "Out of Stock" : "Add to Cart"}</span>
+              <span>
+                {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
+              </span>
             </button>
           </div>
         </form>
@@ -143,9 +148,7 @@ export default function ProductCard({ product, initialStarred = false }: Product
         {/* Status Messages - automatically provided by useActionState */}
         {/* These show success/error feedback from the Server Action */}
         {!state.ok && state.error && (
-          <div className="text-red-600 text-sm mt-2">
-            {state.error}
-          </div>
+          <div className="text-red-600 text-sm mt-2">{state.error}</div>
         )}
         {state.ok && (
           <div className="text-green-600 text-sm mt-2">

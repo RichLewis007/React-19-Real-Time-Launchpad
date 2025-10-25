@@ -1,6 +1,6 @@
 // Demo utilities for testing the application
 
-import { db } from './db';
+import { db } from "./db";
 
 export async function seedDemoData() {
   // Add some items to the demo user's cart for testing
@@ -8,7 +8,7 @@ export async function seedDemoData() {
     await db.addToCart("demo_user", "p_1", 2);
     await db.addToCart("demo_user", "p_3", 1);
     await db.addToCart("demo_user", "p_5", 1);
-    
+
     console.log("Demo data seeded successfully!");
     return true;
   } catch (error) {
@@ -25,7 +25,7 @@ export async function clearDemoData() {
       cart.items = [];
       cart.updatedAt = new Date();
     }
-    
+
     console.log("Demo data cleared successfully!");
     return true;
   } catch (error) {
@@ -35,6 +35,6 @@ export async function clearDemoData() {
 }
 
 // Auto-seed demo data on module load (for development)
-if (typeof window === 'undefined') {
+if (typeof window === "undefined") {
   seedDemoData();
 }

@@ -10,14 +10,14 @@ interface ClientSearchBoxProps {
   className?: string;
 }
 
-export default function ClientSearchBox({ 
-  onQuery, 
+export default function ClientSearchBox({
+  onQuery,
   placeholder = "Search products...",
-  className 
+  className,
 }: ClientSearchBoxProps) {
   const [text, setText] = useState("");
   const [isPending, startTransition] = useTransition();
-  
+
   // Get deferred value to smooth out rapid input changes
   useDeferredValue(text);
 

@@ -9,11 +9,13 @@ Server Components are React components that run on the server during the build p
 ### The Mental Model Shift
 
 Traditional React thinking:
+
 - Components run in the browser
 - Data fetching happens in useEffect
 - Everything is client-side
 
 Server Components thinking:
+
 - Components can run on the server
 - Data fetching happens during rendering
 - Server and client work together
@@ -21,7 +23,9 @@ Server Components thinking:
 ## Why I Chose Server Components
 
 ### The Bundle Size Problem
+
 I was tired of shipping massive JavaScript bundles to users. A typical e-commerce product list might include:
+
 - Product data fetching logic
 - Image optimization code
 - Search and filtering logic
@@ -30,7 +34,9 @@ I was tired of shipping massive JavaScript bundles to users. A typical e-commerc
 With Server Components, the product data gets rendered on the server and sent as HTML. The user gets content immediately, and I don't have to worry about hydration mismatches.
 
 ### The Data Fetching Problem
+
 Traditional React data fetching is messy:
+
 ```tsx
 // The old way - messy and error-prone
 function ProductList() {
@@ -39,13 +45,13 @@ function ProductList() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/products')
-      .then(res => res.json())
-      .then(data => {
+    fetch("/api/products")
+      .then((res) => res.json())
+      .then((data) => {
         setProducts(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err);
         setLoading(false);
       });
@@ -53,10 +59,10 @@ function ProductList() {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  
+
   return (
     <div>
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
@@ -65,14 +71,15 @@ function ProductList() {
 ```
 
 With Server Components, it's much cleaner:
+
 ```tsx
 // The new way - clean and simple
 async function ProductList() {
   const products = await db.getProducts();
-  
+
   return (
     <div>
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
@@ -83,12 +90,13 @@ async function ProductList() {
 ## How I Implemented Server Components
 
 ### Product List Component
+
 ```tsx
 // This runs on the server, not in the browser
 export default async function ProductList({ products }: ProductListProps) {
   // I can access databases, file systems, anything server-side
   const processedProducts = await enhanceProductData(products);
-  
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {processedProducts.map((product) => (
@@ -100,6 +108,7 @@ export default async function ProductList({ products }: ProductListProps) {
 ```
 
 ### Search Results Component
+
 ```tsx
 // Server component for search results
 export default async function SearchResults({ query }: SearchResultsProps) {
@@ -107,7 +116,7 @@ export default async function SearchResults({ query }: SearchResultsProps) {
 
   if (query.trim()) {
     products = await db.searchProducts(query);
-    
+
     // Simulate slow response if slow mode is enabled
     if (getSlowMode()) {
       products = await simulateSlowResponse(products, 1500);
@@ -123,10 +132,11 @@ export default async function SearchResults({ query }: SearchResultsProps) {
           {query.trim() ? `Search Results for "${query}"` : "All Products"}
         </h2>
         <span className="text-gray-600">
-          {products.length} {products.length === 1 ? "product" : "products"} found
+          {products.length} {products.length === 1 ? "product" : "products"}{" "}
+          found
         </span>
       </div>
-      
+
       <ProductList products={products} />
     </div>
   );
@@ -136,13 +146,17 @@ export default async function SearchResults({ query }: SearchResultsProps) {
 ## The Key Benefits I Discovered
 
 ### 1. Reduced Bundle Size
+
 Server Components don't get sent to the client. This means:
+
 - Less JavaScript to download
 - Faster initial page loads
 - Better performance on slower devices
 
 ### 2. Direct Database Access
+
 I can access databases directly from Server Components:
+
 ```tsx
 async function TrendingProducts() {
   const products = await db.getTrendingProducts();
@@ -153,9 +167,11 @@ async function TrendingProducts() {
 No need for API endpoints or data fetching logic on the client.
 
 ### 3. Better SEO
+
 Server Components render to HTML on the server, making them fully crawlable by search engines. This is crucial for e-commerce applications.
 
 ### 4. Improved Performance
+
 - Faster initial page loads
 - Reduced client-side JavaScript
 - Better Core Web Vitals scores
@@ -163,28 +179,31 @@ Server Components render to HTML on the server, making them fully crawlable by s
 ## Server vs Client Components
 
 ### Server Components (Default)
+
 - Run on the server
 - Can access databases and file systems
 - Don't get sent to the client
 - Can't use browser APIs or event handlers
 
 ### Client Components (Marked with "use client")
+
 - Run in the browser
 - Can use browser APIs and event handlers
 - Get sent to the client as JavaScript
 - Can't access server-side resources directly
 
 ### How I Mixed Them
+
 ```tsx
 // Server Component - renders on server
 export default async function ProductPage({ params }: ProductPageProps) {
   const product = await db.getProduct(params.id);
-  
+
   return (
     <div>
       <h1>{product.title}</h1>
       <p>{product.description}</p>
-      
+
       {/* Client Component - handles interactivity */}
       <AddToCartForm product={product} />
     </div>
@@ -195,6 +214,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 ## Common Patterns I Used
 
 ### 1. Data Fetching
+
 ```tsx
 // Server Component for data fetching
 async function ProductList() {
@@ -204,6 +224,7 @@ async function ProductList() {
 ```
 
 ### 2. Error Handling
+
 ```tsx
 // Server Component with error handling
 async function ProductPage({ params }: ProductPageProps) {
@@ -220,12 +241,13 @@ async function ProductPage({ params }: ProductPageProps) {
 ```
 
 ### 3. Conditional Rendering
+
 ```tsx
 // Server Component with conditional rendering
 async function HomePage() {
   const trendingProducts = await db.getTrendingProducts();
   const recommendedProducts = await db.getRecommendedProducts();
-  
+
   return (
     <div>
       {trendingProducts.length > 0 && (
@@ -242,12 +264,14 @@ async function HomePage() {
 ## Performance Considerations
 
 ### When to Use Server Components
+
 - Data fetching and processing
 - Static content generation
 - SEO-critical content
 - Complex computations
 
 ### When to Use Client Components
+
 - User interactions and event handlers
 - Browser APIs (localStorage, geolocation, etc.)
 - Real-time updates

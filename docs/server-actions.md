@@ -9,12 +9,14 @@ Server Actions are functions that run on the server but can be called directly f
 ### The Mental Model Shift
 
 Traditional thinking:
+
 - Build API endpoints
 - Handle fetch requests
 - Manage loading states
 - Parse JSON responses
 
 Server Actions thinking:
+
 - Write functions that run on the server
 - Call them directly from React components
 - Handle everything with React patterns
@@ -22,7 +24,9 @@ Server Actions thinking:
 ## Why I Chose Server Actions
 
 ### The Form Problem
+
 I was tired of building forms that required:
+
 - API endpoints
 - Fetch request handling
 - Loading state management
@@ -32,6 +36,7 @@ I was tired of building forms that required:
 With Server Actions, I can write a function that runs on the server and call it directly from a form. No API endpoints, no fetch requests, no complex state management.
 
 ### The Type Safety Problem
+
 Traditional API calls lose type safety across the client-server boundary. With Server Actions, I get full TypeScript support from the server function to the client component.
 
 ## How I Implemented Server Actions
@@ -75,19 +80,20 @@ export async function addToCart(
     revalidatePath("/cart");
     revalidatePath("/");
 
-    return { 
-      ok: true, 
-      data: { 
+    return {
+      ok: true,
+      data: {
         message: `${quantity} ${product.title} added to cart`,
         productId,
-        quantity 
-      } 
+        quantity,
+      },
     };
   } catch (error) {
     console.error("Add to cart error:", error);
-    return { 
-      ok: false, 
-      error: error instanceof Error ? error.message : "Failed to add item to cart" 
+    return {
+      ok: false,
+      error:
+        error instanceof Error ? error.message : "Failed to add item to cart",
     };
   }
 }
@@ -119,10 +125,13 @@ export default function AddToCartForm({ product }: AddToCartFormProps) {
       <form action={formAction} className="space-y-4">
         <input type="hidden" name="productId" value={product.id} />
         <input type="hidden" name="userId" value="demo_user" />
-        
+
         <div className="flex items-center space-x-4">
           <div>
-            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="quantity"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Quantity
             </label>
             <input
@@ -137,26 +146,19 @@ export default function AddToCartForm({ product }: AddToCartFormProps) {
             />
           </div>
           <div className="flex-1">
-            <FormButton 
-              className="w-full"
-              disabled={product.stock === 0}
-            >
+            <FormButton className="w-full" disabled={product.stock === 0}>
               {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
             </FormButton>
           </div>
         </div>
       </form>
-      
+
       {/* Status Messages */}
       {!state.ok && state.error && (
-        <div className="text-red-600 text-sm mt-2">
-          {state.error}
-        </div>
+        <div className="text-red-600 text-sm mt-2">{state.error}</div>
       )}
       {state.ok && (
-        <div className="text-green-600 text-sm mt-2">
-          {state.data?.message}
-        </div>
+        <div className="text-green-600 text-sm mt-2">{state.data?.message}</div>
       )}
     </div>
   );
@@ -174,23 +176,29 @@ export default function AddToCartForm({ product }: AddToCartFormProps) {
 ## The Key Benefits I Discovered
 
 ### 1. Simplified Form Handling
+
 No more complex state management for forms. Just write a server function and call it from a form.
 
 ### 2. Type Safety
+
 Full TypeScript support across the client-server boundary. No more losing type information in API calls.
 
 ### 3. Automatic Serialization
+
 Form data is automatically serialized and sent to the server. No need to manually handle JSON parsing.
 
 ### 4. Built-in Error Handling
+
 Consistent error states across the app with automatic error handling.
 
 ### 5. Cache Invalidation
+
 Automatic revalidation of relevant pages when data changes.
 
 ## Common Patterns I Used
 
 ### 1. Form Validation
+
 ```tsx
 export async function updateProfile(
   prevState: ActionState,
@@ -207,20 +215,21 @@ export async function updateProfile(
     // Update user profile
     await db.updateUser(userId, { name, email });
 
-    return { 
-      ok: true, 
-      data: { message: "Profile updated successfully" }
+    return {
+      ok: true,
+      data: { message: "Profile updated successfully" },
     };
   } catch (error) {
-    return { 
-      ok: false, 
-      error: "Failed to update profile" 
+    return {
+      ok: false,
+      error: "Failed to update profile",
     };
   }
 }
 ```
 
 ### 2. Database Operations
+
 ```tsx
 export async function updateQuantity(
   prevState: ActionState,
@@ -234,20 +243,21 @@ export async function updateQuantity(
     await db.updateCartItem(userId, productId, quantity);
     revalidatePath("/cart");
 
-    return { 
-      ok: true, 
-      data: { message: "Cart updated" }
+    return {
+      ok: true,
+      data: { message: "Cart updated" },
     };
   } catch (error) {
-    return { 
-      ok: false, 
-      error: "Failed to update cart item" 
+    return {
+      ok: false,
+      error: "Failed to update cart item",
     };
   }
 }
 ```
 
 ### 3. Complex Operations
+
 ```tsx
 export async function checkout(
   prevState: ActionState,
@@ -262,28 +272,28 @@ export async function checkout(
     }
 
     // Simulate payment processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     // Process order
     const order = await db.createOrder(userId, cart.items);
-    
+
     // Clear cart
     await db.clearCart(userId);
-    
+
     revalidatePath("/cart");
     revalidatePath("/");
 
-    return { 
-      ok: true, 
-      data: { 
+    return {
+      ok: true,
+      data: {
         message: "Order placed successfully!",
-        orderId: order.id
-      } 
+        orderId: order.id,
+      },
     };
   } catch (error) {
-    return { 
-      ok: false, 
-      error: "Failed to process checkout" 
+    return {
+      ok: false,
+      error: "Failed to process checkout",
     };
   }
 }
@@ -292,12 +302,14 @@ export async function checkout(
 ## Performance Considerations
 
 ### When to Use Server Actions
+
 - Form submissions
 - Data mutations
 - Complex server-side operations
 - Operations that require server-side validation
 
 ### When Not to Use Server Actions
+
 - Real-time updates
 - Client-side only operations
 - Operations that don't require server-side processing
@@ -305,6 +317,7 @@ export async function checkout(
 ## Best Practices
 
 ### 1. Always Handle Errors
+
 ```tsx
 export async function myAction(prevState: ActionState, formData: FormData) {
   try {
@@ -317,24 +330,26 @@ export async function myAction(prevState: ActionState, formData: FormData) {
 ```
 
 ### 2. Validate Input
+
 ```tsx
 export async function myAction(prevState: ActionState, formData: FormData) {
   const input = String(formData.get("input"));
-  
+
   if (!input) {
     return { ok: false, error: "Input is required" };
   }
-  
+
   // Continue with the action
 }
 ```
 
 ### 3. Revalidate Relevant Pages
+
 ```tsx
 export async function myAction(prevState: ActionState, formData: FormData) {
   // Do the work
   await db.updateData();
-  
+
   // Revalidate relevant pages
   revalidatePath("/");
   revalidatePath("/products");
@@ -342,6 +357,7 @@ export async function myAction(prevState: ActionState, formData: FormData) {
 ```
 
 ### 4. Use TypeScript
+
 ```tsx
 interface ActionState {
   ok: boolean;

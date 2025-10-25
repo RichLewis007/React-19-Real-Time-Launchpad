@@ -9,12 +9,14 @@ Optimistic Updates are a pattern where you update the UI immediately with the ex
 ### The Mental Model
 
 Traditional thinking:
+
 - User clicks button
 - Show loading state
 - Wait for server response
 - Update UI with result
 
 Optimistic thinking:
+
 - User clicks button
 - Update UI immediately with expected result
 - Send request to server in background
@@ -23,9 +25,11 @@ Optimistic thinking:
 ## Why I Chose Optimistic Updates
 
 ### The Responsiveness Problem
+
 Users expect instant feedback. When they click a button, they want to see the result immediately, not wait for a server round-trip. Optimistic Updates let us show the expected result immediately, then revert if something goes wrong.
 
 ### The User Experience Problem
+
 Loading states are necessary, but they can make apps feel slow. Optimistic Updates make apps feel instant while still handling errors gracefully.
 
 ## How I Implemented Optimistic Updates
@@ -46,21 +50,21 @@ interface OptimisticStarProps {
   className?: string;
 }
 
-export function OptimisticStar({ 
-  productId, 
-  initialStarred, 
-  className 
+export function OptimisticStar({
+  productId,
+  initialStarred,
+  className,
 }: OptimisticStarProps) {
   const [isPending, startTransition] = useTransition();
   const [starred, setStarred] = useOptimistic(
-    initialStarred, 
+    initialStarred,
     (_prev, next: boolean) => next
   );
 
   const handleToggle = () => {
     const newStarred = !starred;
     setStarred(newStarred); // Immediate UI update
-    
+
     startTransition(async () => {
       try {
         const success = await toggleStar(productId);
@@ -88,12 +92,12 @@ export function OptimisticStar({
         className
       )}
     >
-      <Star 
+      <Star
         className={cn(
           "h-5 w-5 transition-all",
           starred && "fill-current",
           isPending && "animate-pulse"
-        )} 
+        )}
       />
     </button>
   );
@@ -115,7 +119,7 @@ export async function toggleStar(productId: string): Promise<boolean> {
   try {
     // In a real app, you would toggle the star status in the database
     // For demo purposes, we'll just return true
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise((resolve) => setTimeout(resolve, 500));
     return true;
   } catch (error) {
     console.error("Toggle star error:", error);
@@ -127,31 +131,33 @@ export async function toggleStar(productId: string): Promise<boolean> {
 ## The Key Benefits I Discovered
 
 ### 1. Instant Feedback
+
 Users see the result immediately when they interact with the app. No more waiting for server responses.
 
 ### 2. Better User Experience
+
 The app feels more responsive and interactive, even on slow connections.
 
 ### 3. Graceful Error Handling
+
 If something goes wrong, the UI reverts to the previous state automatically.
 
 ### 4. Reduced Perceived Latency
+
 Users don't feel like they're waiting for the app to respond.
 
 ## Common Patterns I Used
 
 ### 1. Toggle Operations
+
 ```tsx
 function OptimisticToggle({ initialValue, onToggle }) {
-  const [value, setValue] = useOptimistic(
-    initialValue,
-    (_prev, next) => next
-  );
+  const [value, setValue] = useOptimistic(initialValue, (_prev, next) => next);
 
   const handleToggle = () => {
     const newValue = !value;
     setValue(newValue);
-    
+
     startTransition(async () => {
       try {
         const success = await onToggle(newValue);
@@ -164,15 +170,12 @@ function OptimisticToggle({ initialValue, onToggle }) {
     });
   };
 
-  return (
-    <button onClick={handleToggle}>
-      {value ? "On" : "Off"}
-    </button>
-  );
+  return <button onClick={handleToggle}>{value ? "On" : "Off"}</button>;
 }
 ```
 
 ### 2. Add/Remove Operations
+
 ```tsx
 function OptimisticList({ items, onAdd, onRemove }) {
   const [optimisticItems, setOptimisticItems] = useOptimistic(
@@ -182,7 +185,7 @@ function OptimisticList({ items, onAdd, onRemove }) {
         return [...prev, action.item];
       }
       if (action.type === "remove") {
-        return prev.filter(item => item.id !== action.id);
+        return prev.filter((item) => item.id !== action.id);
       }
       return prev;
     }
@@ -190,7 +193,7 @@ function OptimisticList({ items, onAdd, onRemove }) {
 
   const handleAdd = (item) => {
     setOptimisticItems({ type: "add", item });
-    
+
     startTransition(async () => {
       try {
         const success = await onAdd(item);
@@ -205,7 +208,7 @@ function OptimisticList({ items, onAdd, onRemove }) {
 
   return (
     <div>
-      {optimisticItems.map(item => (
+      {optimisticItems.map((item) => (
         <div key={item.id}>
           {item.name}
           <button onClick={() => handleRemove(item.id)}>Remove</button>
@@ -217,6 +220,7 @@ function OptimisticList({ items, onAdd, onRemove }) {
 ```
 
 ### 3. Form Submissions
+
 ```tsx
 function OptimisticForm({ onSubmit }) {
   const [isSubmitting, setIsSubmitting] = useOptimistic(
@@ -226,7 +230,7 @@ function OptimisticForm({ onSubmit }) {
 
   const handleSubmit = async (formData) => {
     setIsSubmitting(true);
-    
+
     startTransition(async () => {
       try {
         const success = await onSubmit(formData);
@@ -253,12 +257,14 @@ function OptimisticForm({ onSubmit }) {
 ## Performance Considerations
 
 ### When to Use Optimistic Updates
+
 - Toggle operations (like/unlike, star/unstar)
 - Add/remove operations (add to cart, remove from favorites)
 - Simple form submissions
 - Operations that are likely to succeed
 
 ### When Not to Use Optimistic Updates
+
 - Operations that are likely to fail
 - Operations with complex validation
 - Operations that affect multiple users
@@ -267,11 +273,12 @@ function OptimisticForm({ onSubmit }) {
 ## Best Practices
 
 ### 1. Always Handle Failures
+
 ```tsx
 const handleToggle = () => {
   const newValue = !value;
   setValue(newValue);
-  
+
   startTransition(async () => {
     try {
       const success = await onToggle(newValue);
@@ -286,13 +293,13 @@ const handleToggle = () => {
 ```
 
 ### 2. Provide Visual Feedback
+
 ```tsx
-<button disabled={isPending}>
-  {isPending ? "Loading..." : "Toggle"}
-</button>
+<button disabled={isPending}>{isPending ? "Loading..." : "Toggle"}</button>
 ```
 
 ### 3. Use Meaningful Error Messages
+
 ```tsx
 if (!success) {
   setValue(value);
@@ -301,6 +308,7 @@ if (!success) {
 ```
 
 ### 4. Consider the User's Intent
+
 ```tsx
 // Good: Revert to previous state
 if (!success) {

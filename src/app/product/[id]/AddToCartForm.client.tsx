@@ -17,10 +17,13 @@ export default function AddToCartForm({ product }: AddToCartFormProps) {
       <form action={formAction} className="space-y-4">
         <input type="hidden" name="productId" value={product.id} />
         <input type="hidden" name="userId" value="demo_user" />
-        
+
         <div className="flex items-center space-x-4">
           <div>
-            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              htmlFor="quantity"
+              className="block text-sm font-medium text-gray-700 mb-1"
+            >
               Quantity
             </label>
             <input
@@ -35,26 +38,19 @@ export default function AddToCartForm({ product }: AddToCartFormProps) {
             />
           </div>
           <div className="flex-1">
-            <FormButton 
-              className="w-full"
-              disabled={product.stock === 0}
-            >
+            <FormButton className="w-full" disabled={product.stock === 0}>
               {product.stock === 0 ? "Out of Stock" : "Add to Cart"}
             </FormButton>
           </div>
         </div>
       </form>
-      
+
       {/* Status Messages */}
       {!state.ok && state.error && (
-        <div className="text-red-600 text-sm mt-2">
-          {state.error}
-        </div>
+        <div className="text-red-600 text-sm mt-2">{state.error}</div>
       )}
       {state.ok && (
-        <div className="text-green-600 text-sm mt-2">
-          {state.data?.message}
-        </div>
+        <div className="text-green-600 text-sm mt-2">{state.data?.message}</div>
       )}
     </div>
   );

@@ -66,10 +66,10 @@ export default async function ProductList({ products }: ProductListProps) {
 }
 
 // Client Component - handles interactivity
-"use client";
+("use client");
 export default function ProductCard({ product }: ProductCardProps) {
   const [state, formAction] = useActionState(addToCart, { ok: false });
-  
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       {/* Product display and add to cart functionality */}
@@ -94,14 +94,17 @@ I implemented a data layer that separates concerns:
 ```tsx
 // lib/db.ts - Data access layer
 class MockDatabase {
-  async getProducts(filters?: { category?: string; limit?: number }): Promise<Product[]> {
+  async getProducts(filters?: {
+    category?: string;
+    limit?: number;
+  }): Promise<Product[]> {
     // Database logic
   }
-  
+
   async getProduct(id: string): Promise<Product | null> {
     // Database logic
   }
-  
+
   async searchProducts(query: string): Promise<Product[]> {
     // Search logic
   }
@@ -131,18 +134,18 @@ I implemented a favorites system that demonstrates optimistic updates and real-t
 
 ```tsx
 // components/OptimisticStar.client.tsx - Optimistic star button
-export default function OptimisticStar({ 
-  product, 
-  initialStarred, 
-  userId 
+export default function OptimisticStar({
+  product,
+  initialStarred,
+  userId,
 }: OptimisticStarProps) {
   const [starred, setStarred] = useOptimistic(
-    initialStarred, 
+    initialStarred,
     (_prev, next: boolean) => next
   );
-  
+
   const [state, formAction] = useActionState(toggleStar, { ok: false });
-  
+
   return (
     <form action={formAction}>
       <input type="hidden" name="productId" value={product.id} />
@@ -150,12 +153,12 @@ export default function OptimisticStar({
       <button
         type="submit"
         className={`p-2 rounded-full transition-colors ${
-          starred 
-            ? 'text-yellow-500 hover:text-yellow-600' 
-            : 'text-gray-400 hover:text-yellow-500'
+          starred
+            ? "text-yellow-500 hover:text-yellow-600"
+            : "text-gray-400 hover:text-yellow-500"
         }`}
       >
-        <Star className="h-5 w-5" fill={starred ? 'currentColor' : 'none'} />
+        <Star className="h-5 w-5" fill={starred ? "currentColor" : "none"} />
       </button>
     </form>
   );
@@ -185,7 +188,7 @@ export async function addToCart(
     // Server-side logic
     await db.addToCart(userId, productId, quantity);
     revalidatePath("/cart");
-    
+
     return { ok: true, data: { message: "Added to cart" } };
   } catch (error) {
     return { ok: false, error: "Failed to add to cart" };
@@ -222,13 +225,15 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Error caught by boundary:', error, errorInfo);
+    console.error("Error caught by boundary:", error, errorInfo);
     this.props.onError?.(error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || <DefaultErrorFallback error={this.state.error} />;
+      return (
+        this.props.fallback || <DefaultErrorFallback error={this.state.error} />
+      );
     }
 
     return this.props.children;
@@ -273,11 +278,11 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      
+
       <Suspense fallback={<SectionSkeleton title="Trending Now" />}>
         <TrendingProducts />
       </Suspense>
-      
+
       <Suspense fallback={<SectionSkeleton title="Recommended for You" />}>
         <RecommendedProducts />
       </Suspense>
@@ -301,26 +306,26 @@ I designed the app to be testable:
 
 ```tsx
 // Example test structure
-describe('ProductList', () => {
-  it('renders products correctly', () => {
+describe("ProductList", () => {
+  it("renders products correctly", () => {
     const products = mockProducts;
     render(<ProductList products={products} />);
-    
-    expect(screen.getByText('Product 1')).toBeInTheDocument();
-    expect(screen.getByText('Product 2')).toBeInTheDocument();
+
+    expect(screen.getByText("Product 1")).toBeInTheDocument();
+    expect(screen.getByText("Product 2")).toBeInTheDocument();
   });
 });
 
-describe('addToCart', () => {
-  it('adds product to cart successfully', async () => {
+describe("addToCart", () => {
+  it("adds product to cart successfully", async () => {
     const formData = new FormData();
-    formData.append('productId', '1');
-    formData.append('quantity', '2');
-    
+    formData.append("productId", "1");
+    formData.append("quantity", "2");
+
     const result = await addToCart({ ok: false }, formData);
-    
+
     expect(result.ok).toBe(true);
-    expect(result.data.message).toBe('2 Product 1 added to cart');
+    expect(result.data.message).toBe("2 Product 1 added to cart");
   });
 });
 ```
@@ -356,18 +361,23 @@ This architecture is designed to evolve:
 ## Key Takeaways
 
 ### 1. Start with Principles
+
 Don't just follow patterns - understand the principles behind them.
 
 ### 2. Separate Concerns
+
 Each part of your app should have a single responsibility.
 
 ### 3. Think Server-First
+
 Use the server for what it's good at, the client for what it's good at.
 
 ### 4. Design for Performance
+
 Performance isn't an afterthought - it's a design decision.
 
 ### 5. Make It Testable
+
 Design your code to be easy to test from the beginning.
 
 ## Architecture Checklist

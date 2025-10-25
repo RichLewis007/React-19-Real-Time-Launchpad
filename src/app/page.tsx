@@ -9,10 +9,10 @@ async function TrendingProducts() {
   const userId = "demo_user";
   const [products, starredProducts] = await Promise.all([
     db.getTrendingProducts(),
-    db.getStarredProducts(userId)
+    db.getStarredProducts(userId),
   ]);
-  const starredProductIds = starredProducts.map(p => p.id);
-  
+  const starredProductIds = starredProducts.map((p) => p.id);
+
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -29,10 +29,10 @@ async function RecommendedProducts() {
   const userId = "demo_user";
   const [products, starredProducts] = await Promise.all([
     db.getRecommendedProducts(userId),
-    db.getStarredProducts(userId)
+    db.getStarredProducts(userId),
   ]);
-  const starredProductIds = starredProducts.map(p => p.id);
-  
+  const starredProductIds = starredProducts.map((p) => p.id);
+
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
@@ -51,7 +51,10 @@ function SectionSkeleton({ title }: { title: string }) {
       <h2 className="text-2xl font-bold text-gray-900">{title}</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {[...Array(4)].map((_, i) => (
-          <div key={i} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+          <div
+            key={i}
+            className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse"
+          >
             <div className="aspect-square bg-gray-200"></div>
             <div className="p-4 space-y-2">
               <div className="h-4 bg-gray-200 rounded"></div>
@@ -73,7 +76,7 @@ export default function Home() {
         <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
           {/* Colorful gradient background - less pink */}
           <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-blue-500 to-orange-400"></div>
-          
+
           {/* Animated background elements */}
           <div className="absolute inset-0">
             <div className="absolute top-10 left-10 w-20 h-20 bg-white/20 rounded-full animate-drift-1"></div>
@@ -81,7 +84,7 @@ export default function Home() {
             <div className="absolute bottom-20 left-1/4 w-12 h-12 bg-cyan-300/40 rounded-full animate-drift-3"></div>
             <div className="absolute bottom-10 right-1/3 w-8 h-8 bg-green-300/50 rounded-full animate-drift-4"></div>
           </div>
-          
+
           {/* Hero content */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center text-white px-6">
@@ -94,20 +97,33 @@ export default function Home() {
                 Real-Time Launchpad
               </h1>
               <p className="text-xl md:text-2xl max-w-3xl mx-auto mb-8 text-white/90 leading-relaxed">
-                Experience the future of e-commerce with React 19&apos;s latest features: 
-                <span className="font-semibold text-yellow-200"> Server Components</span>, 
-                <span className="font-semibold text-cyan-200"> Suspense streaming</span>, and 
-                <span className="font-semibold text-pink-200"> optimistic updates</span>.
+                Experience the future of e-commerce with React 19&apos;s latest
+                features:
+                <span className="font-semibold text-yellow-200">
+                  {" "}
+                  Server Components
+                </span>
+                ,
+                <span className="font-semibold text-cyan-200">
+                  {" "}
+                  Suspense streaming
+                </span>
+                , and
+                <span className="font-semibold text-pink-200">
+                  {" "}
+                  optimistic updates
+                </span>
+                .
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <a 
-                  href="/search" 
+                <a
+                  href="/search"
                   className="inline-flex items-center px-8 py-4 bg-white text-purple-600 font-bold rounded-full hover:bg-yellow-300 transition-all duration-300 transform hover:scale-105 shadow-lg"
                 >
                   🛍️ Start Shopping
                 </a>
-                <a 
-                  href="/starred" 
+                <a
+                  href="/starred"
                   className="inline-flex items-center px-8 py-4 bg-white/20 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-105 border border-white/30"
                 >
                   ⭐ View Favorites
@@ -145,25 +161,33 @@ export default function Home() {
             <div className="bg-blue-100 rounded-full p-3 w-12 h-12 mx-auto mb-3 flex items-center justify-center">
               <TrendingUp className="h-6 w-6 text-blue-600" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Server Components</h3>
+            <h3 className="font-semibold text-gray-900 mb-2">
+              Server Components
+            </h3>
             <p className="text-gray-600 text-sm">
-              Product listings are rendered on the server for better performance and SEO.
+              Product listings are rendered on the server for better performance
+              and SEO.
             </p>
           </div>
           <div className="text-center p-4">
             <div className="bg-purple-100 rounded-full p-3 w-12 h-12 mx-auto mb-3 flex items-center justify-center">
               <Sparkles className="h-6 w-6 text-purple-600" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Suspense Streaming</h3>
+            <h3 className="font-semibold text-gray-900 mb-2">
+              Suspense Streaming
+            </h3>
             <p className="text-gray-600 text-sm">
-              Sections load progressively with streaming for faster perceived performance.
+              Sections load progressively with streaming for faster perceived
+              performance.
             </p>
           </div>
           <div className="text-center p-4">
             <div className="bg-green-100 rounded-full p-3 w-12 h-12 mx-auto mb-3 flex items-center justify-center">
               <Loader2 className="h-6 w-6 text-green-600" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Optimistic Updates</h3>
+            <h3 className="font-semibold text-gray-900 mb-2">
+              Optimistic Updates
+            </h3>
             <p className="text-gray-600 text-sm">
               Instant UI feedback with automatic rollback on errors.
             </p>

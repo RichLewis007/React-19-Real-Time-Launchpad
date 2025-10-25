@@ -17,7 +17,7 @@ export default function PreferencesForm({ user }: PreferencesFormProps) {
       <input type="hidden" name="userId" value={user.id} />
       <input type="hidden" name="name" value={user.name} />
       <input type="hidden" name="email" value={user.email} />
-      
+
       <div className="space-y-4">
         <div className="flex items-center">
           <input
@@ -31,9 +31,12 @@ export default function PreferencesForm({ user }: PreferencesFormProps) {
             Enable email notifications
           </label>
         </div>
-        
+
         <div>
-          <label htmlFor="theme" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="theme"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Theme Preference
           </label>
           <select
@@ -48,21 +51,15 @@ export default function PreferencesForm({ user }: PreferencesFormProps) {
           </select>
         </div>
       </div>
-      
-      <FormButton>
-        Update Preferences
-      </FormButton>
-      
+
+      <FormButton>Update Preferences</FormButton>
+
       {/* Status Messages */}
       {!state.ok && state.error && (
-        <div className="text-red-600 text-sm mt-2">
-          {state.error}
-        </div>
+        <div className="text-red-600 text-sm mt-2">{state.error}</div>
       )}
       {state.ok && (
-        <div className="text-green-600 text-sm mt-2">
-          {state.data?.message}
-        </div>
+        <div className="text-green-600 text-sm mt-2">{state.data?.message}</div>
       )}
     </form>
   );

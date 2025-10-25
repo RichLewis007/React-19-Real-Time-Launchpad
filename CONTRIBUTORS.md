@@ -4,7 +4,7 @@ Thank you to all the wonderful people who have contributed to Real-Time Launchpa
 
 ## Project Maintainer
 
-- **Rich Lewis** - *Creator & Maintainer*
+- **Rich Lewis** - _Creator & Maintainer_
   - GitHub: [@RichLewis007](https://github.com/RichLewis007)
 
 ## How to Contribute
@@ -20,6 +20,7 @@ We welcome contributions from everyone! See our [CONTRIBUTING.md](CONTRIBUTING.m
 ## Recognition
 
 All contributors are:
+
 - Listed in this file
 - Credited in release notes
 - Appreciated for their time and effort

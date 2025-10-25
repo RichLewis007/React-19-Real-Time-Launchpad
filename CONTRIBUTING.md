@@ -44,11 +44,13 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
 ## Development Setup
 
 1. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 2. **Run the development server**:
+
    ```bash
    npm run dev
    ```
@@ -57,6 +59,7 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 4. **Run linting**:
+
    ```bash
    npm run lint
    ```
@@ -82,6 +85,7 @@ We welcome various types of contributions:
 ### Contributing Process
 
 1. **Create a branch**:
+
    ```bash
    git checkout -b feature/your-feature-name
    # or
@@ -95,6 +99,7 @@ We welcome various types of contributions:
 4. **Commit your changes**: Follow our [commit guidelines](#commit-guidelines)
 
 5. **Push to your fork**:
+
    ```bash
    git push origin your-branch-name
    ```
@@ -157,7 +162,7 @@ export default async function ProductList({ products }) {
 }
 
 // ✅ Client Component (when needed)
-"use client";
+("use client");
 export function InteractiveButton() {
   return <button>Click me</button>;
 }
@@ -215,9 +220,11 @@ test(actions): add tests for addToCart action
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update
@@ -225,12 +232,15 @@ Brief description of changes
 - [ ] Code refactoring
 
 ## Testing
+
 How has this been tested?
 
 ## Screenshots (if applicable)
+
 Add screenshots here
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Comments added for complex code
@@ -271,12 +281,12 @@ npm test -- --coverage
 ### Test Structure
 
 ```tsx
-describe('ProductCard', () => {
-  it('renders product information correctly', () => {
+describe("ProductCard", () => {
+  it("renders product information correctly", () => {
     // Test implementation
   });
 
-  it('handles add to cart action', async () => {
+  it("handles add to cart action", async () => {
     // Test implementation
   });
 });
@@ -319,6 +329,7 @@ async function addToCart(userId: string, productId: string, quantity: number) {
 ## Recognition
 
 Contributors will be:
+
 - Listed in our CONTRIBUTORS.md file
 - Credited in release notes
 - Appreciated by the community!

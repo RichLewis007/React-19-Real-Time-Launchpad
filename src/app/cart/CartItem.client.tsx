@@ -35,7 +35,11 @@ export default function CartItem({ item, product }: CartItemProps) {
           <form action={formAction} className="flex items-center space-x-2">
             <input type="hidden" name="productId" value={item.productId} />
             <input type="hidden" name="userId" value="demo_user" />
-            <input type="hidden" name="quantity" value={Math.max(0, item.quantity - 1)} />
+            <input
+              type="hidden"
+              name="quantity"
+              value={Math.max(0, item.quantity - 1)}
+            />
             <button
               type="submit"
               disabled={item.quantity <= 1}
@@ -44,11 +48,11 @@ export default function CartItem({ item, product }: CartItemProps) {
               <Minus className="h-4 w-4" />
             </button>
           </form>
-          
+
           <span className="text-lg font-medium min-w-[2rem] text-center">
             {item.quantity}
           </span>
-          
+
           <form action={formAction} className="flex items-center space-x-2">
             <input type="hidden" name="productId" value={item.productId} />
             <input type="hidden" name="userId" value="demo_user" />
@@ -81,17 +85,13 @@ export default function CartItem({ item, product }: CartItemProps) {
           </form>
         </div>
       </div>
-      
+
       {/* Status Messages */}
       {!state.ok && state.error && (
-        <div className="text-red-600 text-sm mt-2">
-          {state.error}
-        </div>
+        <div className="text-red-600 text-sm mt-2">{state.error}</div>
       )}
       {state.ok && (
-        <div className="text-green-600 text-sm mt-2">
-          {state.data?.message}
-        </div>
+        <div className="text-green-600 text-sm mt-2">{state.data?.message}</div>
       )}
     </div>
   );

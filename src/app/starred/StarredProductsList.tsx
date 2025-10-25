@@ -14,9 +14,9 @@ interface StarredProductsListProps {
   userId: string;
 }
 
-export default function StarredProductsList({ 
-  initialProducts, 
-  userId 
+export default function StarredProductsList({
+  initialProducts,
+  userId,
 }: StarredProductsListProps) {
   const [products, setProducts] = useState(initialProducts);
   const [isPending, startTransition] = useTransition();
@@ -27,7 +27,7 @@ export default function StarredProductsList({
       try {
         const success = await removeFromStarred(productId);
         if (success) {
-          setProducts(prev => prev.filter(p => p.id !== productId));
+          setProducts((prev) => prev.filter((p) => p.id !== productId));
         }
       } catch (error) {
         console.error("Error removing from starred:", error);
@@ -41,7 +41,7 @@ export default function StarredProductsList({
       formData.append("productId", productId);
       formData.append("quantity", "1");
       formData.append("userId", userId);
-      
+
       addToCartAction(formData);
     });
   };
@@ -50,7 +50,9 @@ export default function StarredProductsList({
     return (
       <div className="text-center py-12">
         <Star className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">No Favorites Yet</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          No Favorites Yet
+        </h3>
         <p className="text-gray-600 mb-6">
           Star products you like to see them here for easy access.
         </p>
@@ -74,7 +76,10 @@ export default function StarredProductsList({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product) => (
-          <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">
+          <div
+            key={product.id}
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200"
+          >
             {/* Product Image */}
             <div className="aspect-square bg-gray-100 relative overflow-hidden">
               <ImageWithFallback
@@ -85,7 +90,7 @@ export default function StarredProductsList({
                 className="w-full h-full object-cover"
                 fallbackSrc="/placeholder-product.svg"
               />
-              
+
               {/* Remove from starred button */}
               <div className="absolute top-2 right-2">
                 <button
@@ -104,7 +109,7 @@ export default function StarredProductsList({
               <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">
                 {product.title}
               </h3>
-              
+
               <div className="flex items-center mb-2">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
@@ -128,7 +133,9 @@ export default function StarredProductsList({
                   {formatPrice(product.priceCents)}
                 </span>
                 <span className="text-sm text-gray-500">
-                  {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+                  {product.stock > 0
+                    ? `${product.stock} in stock`
+                    : "Out of stock"}
                 </span>
               </div>
 

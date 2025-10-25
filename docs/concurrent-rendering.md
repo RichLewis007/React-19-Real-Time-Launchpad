@@ -110,29 +110,34 @@ startTransition(() => {
 const deferredQuery = useDeferredValue(query);
 
 // This will update after the user stops typing
-<SearchResults query={deferredQuery} />
+<SearchResults query={deferredQuery} />;
 ```
 
 ## Real-World Benefits
 
 ### 1. Responsive Search
+
 Users can type smoothly without the input lagging, even when expensive search operations are running in the background.
 
 ### 2. Better User Experience
+
 The app feels more responsive because urgent updates (like typing) get priority over less urgent updates (like search results).
 
 ### 3. Reduced API Calls
+
 By using `useDeferredValue`, we prevent excessive API calls while the user is still typing.
 
 ## Performance Considerations
 
 ### When to Use useTransition
+
 - Search and filtering operations
 - Large list updates
 - Complex calculations
 - Any update that might block the UI
 
 ### When to Use useDeferredValue
+
 - Search queries
 - Filter values
 - Any value that's used for expensive operations
@@ -140,15 +145,16 @@ By using `useDeferredValue`, we prevent excessive API calls while the user is st
 ## Common Patterns
 
 ### 1. Search with Debouncing
+
 ```tsx
 function SearchInput() {
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
-  
+
   // The search results will update after the user stops typing
   return (
     <div>
-      <input value={query} onChange={e => setQuery(e.target.value)} />
+      <input value={query} onChange={(e) => setQuery(e.target.value)} />
       <SearchResults query={deferredQuery} />
     </div>
   );
@@ -156,21 +162,22 @@ function SearchInput() {
 ```
 
 ### 2. Non-blocking Updates
+
 ```tsx
 function ProductList() {
   const [isPending, startTransition] = useTransition();
   const [products, setProducts] = useState([]);
-  
+
   function handleFilter(filter) {
     startTransition(() => {
       setProducts(filterProducts(products, filter));
     });
   }
-  
+
   return (
     <div>
       {isPending && <div>Filtering...</div>}
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
@@ -190,6 +197,7 @@ By marking non-urgent updates with `useTransition` and using `useDeferredValue` 
 ## Best Practices
 
 ### 1. Use useTransition for Expensive Updates
+
 ```tsx
 const [isPending, startTransition] = useTransition();
 
@@ -199,16 +207,21 @@ startTransition(() => {
 ```
 
 ### 2. Use useDeferredValue for Search and Filtering
+
 ```tsx
 const deferredQuery = useDeferredValue(query);
 ```
 
 ### 3. Provide Visual Feedback
+
 ```tsx
-{isPending && <div>Loading...</div>}
+{
+  isPending && <div>Loading...</div>;
+}
 ```
 
 ### 4. Combine with Suspense
+
 ```tsx
 <Suspense fallback={<Skeleton />}>
   <ExpensiveComponent data={deferredData} />

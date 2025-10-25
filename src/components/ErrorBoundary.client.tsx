@@ -40,9 +40,9 @@ export class ErrorBoundary extends React.Component<
     if (this.state.hasError) {
       const FallbackComponent = this.props.fallback || DefaultErrorFallback;
       return (
-        <FallbackComponent 
-          error={this.state.error} 
-          resetError={this.resetError} 
+        <FallbackComponent
+          error={this.state.error}
+          resetError={this.resetError}
         />
       );
     }
@@ -51,12 +51,12 @@ export class ErrorBoundary extends React.Component<
   }
 }
 
-function DefaultErrorFallback({ 
-  error, 
-  resetError 
-}: { 
-  error?: Error; 
-  resetError: () => void; 
+function DefaultErrorFallback({
+  error,
+  resetError,
+}: {
+  error?: Error;
+  resetError: () => void;
 }) {
   return (
     <div className="min-h-[200px] flex items-center justify-center p-6">

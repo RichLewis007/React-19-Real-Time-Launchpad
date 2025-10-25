@@ -17,11 +17,13 @@ interface ProductPageProps {
 
 async function ProductReviews({ productId }: { productId: string }) {
   const reviews = await db.getReviews(productId);
-  
+
   if (reviews.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-500">No reviews yet. Be the first to review this product!</p>
+        <p className="text-gray-500">
+          No reviews yet. Be the first to review this product!
+        </p>
       </div>
     );
   }
@@ -86,9 +88,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="text-center py-12">
           <Package className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-900 mb-2">Product not found</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            Product not found
+          </h2>
           <p className="text-gray-600 mb-6">
-            The product you&apos;re looking for doesn&apos;t exist or has been removed.
+            The product you&apos;re looking for doesn&apos;t exist or has been
+            removed.
           </p>
           <Link
             href="/search"
@@ -130,7 +135,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
             {product.images.length > 1 && (
               <div className="grid grid-cols-4 gap-2">
                 {product.images.slice(1).map((image, index) => (
-                  <div key={index} className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+                  <div
+                    key={index}
+                    className="aspect-square bg-gray-100 rounded-lg overflow-hidden"
+                  >
                     <Image
                       src={image}
                       alt={`${product.title} ${index + 2}`}
@@ -147,7 +155,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {/* Product Info */}
           <div className="space-y-6">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                {product.title}
+              </h1>
               <div className="flex items-center mb-4">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
@@ -175,7 +185,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 {formatPrice(product.priceCents)}
               </div>
               <div className="text-sm text-gray-600">
-                {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
+                {product.stock > 0
+                  ? `${product.stock} in stock`
+                  : "Out of stock"}
               </div>
             </div>
 
@@ -186,17 +198,23 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t">
               <div className="text-center">
                 <Truck className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-                <div className="text-sm font-medium text-gray-900">Free Shipping</div>
+                <div className="text-sm font-medium text-gray-900">
+                  Free Shipping
+                </div>
                 <div className="text-xs text-gray-600">On orders over $50</div>
               </div>
               <div className="text-center">
                 <Shield className="h-8 w-8 text-green-600 mx-auto mb-2" />
-                <div className="text-sm font-medium text-gray-900">Warranty</div>
+                <div className="text-sm font-medium text-gray-900">
+                  Warranty
+                </div>
                 <div className="text-xs text-gray-600">1 year included</div>
               </div>
               <div className="text-center">
                 <Package className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-                <div className="text-sm font-medium text-gray-900">Easy Returns</div>
+                <div className="text-sm font-medium text-gray-900">
+                  Easy Returns
+                </div>
                 <div className="text-xs text-gray-600">30 day policy</div>
               </div>
             </div>
@@ -205,11 +223,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Specifications */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Specifications</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            Specifications
+          </h2>
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {Object.entries(product.specs).map(([key, value]) => (
-                <div key={key} className="flex justify-between py-2 border-b border-gray-200">
+                <div
+                  key={key}
+                  className="flex justify-between py-2 border-b border-gray-200"
+                >
                   <span className="font-medium text-gray-900">{key}</span>
                   <span className="text-gray-600">{value}</span>
                 </div>
@@ -220,7 +243,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Reviews */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Customer Reviews</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+            Customer Reviews
+          </h2>
           <div className="bg-white rounded-lg shadow-md p-6">
             <ErrorBoundary>
               <Suspense fallback={<ReviewsSkeleton />}>

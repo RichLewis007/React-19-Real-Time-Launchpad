@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+
+# Build outputs
+.next
+out
+dist
+build
+
+# Generated files
+*.log
+*.lock
+package-lock.json
+
+# Config files
+*.config.js
+*.config.ts
+*.config.mjs
+
+# Cache
+.cache
+.turbo
+.eslintcache
+
+# Public assets (might have different formatting needs)
+public

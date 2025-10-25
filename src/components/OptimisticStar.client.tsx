@@ -11,10 +11,10 @@ interface OptimisticStarProps {
   className?: string;
 }
 
-export function OptimisticStar({ 
-  productId, 
-  initialStarred, 
-  className 
+export function OptimisticStar({
+  productId,
+  initialStarred,
+  className,
 }: OptimisticStarProps) {
   const [isPending, startTransition] = useTransition();
   const [starred, setStarred] = useOptimistic(
@@ -24,11 +24,11 @@ export function OptimisticStar({
 
   const handleToggle = () => {
     const newStarred = !starred;
-    
+
     startTransition(async () => {
       // Optimistic update
       setStarred(newStarred);
-      
+
       try {
         const success = await toggleStar(productId);
         if (!success) {
@@ -56,12 +56,12 @@ export function OptimisticStar({
         className
       )}
     >
-      <Star 
+      <Star
         className={cn(
           "h-5 w-5 transition-all",
           starred && "fill-current",
           isPending && "animate-pulse"
-        )} 
+        )}
       />
     </button>
   );

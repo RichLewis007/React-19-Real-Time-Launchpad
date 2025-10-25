@@ -27,7 +27,7 @@ export async function updateProfile(
     // Update user preferences
     await db.updateUserPreferences(userId, {
       notifications,
-      theme
+      theme,
     });
 
     // In a real app, you would update the user's name and email in the database
@@ -36,23 +36,24 @@ export async function updateProfile(
 
     revalidatePath("/profile");
 
-    return { 
-      ok: true, 
-      data: { 
+    return {
+      ok: true,
+      data: {
         message: "Profile updated successfully",
         user: {
           name,
           email,
           notifications,
-          theme
-        }
-      } 
+          theme,
+        },
+      },
     };
   } catch (error) {
     console.error("Update profile error:", error);
-    return { 
-      ok: false, 
-      error: error instanceof Error ? error.message : "Failed to update profile" 
+    return {
+      ok: false,
+      error:
+        error instanceof Error ? error.message : "Failed to update profile",
     };
   }
 }
@@ -60,10 +61,10 @@ export async function updateProfile(
 export async function toggleStar(productId: string): Promise<boolean> {
   try {
     const userId = "demo_user"; // In a real app, this would come from authentication
-    
+
     // Check if product is already starred
     const isStarred = await db.isProductStarred(userId, productId);
-    
+
     let success = false;
     if (isStarred) {
       // Remove from starred

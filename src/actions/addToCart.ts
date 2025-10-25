@@ -31,29 +31,30 @@ export async function addToCart(
     }
 
     await db.addToCart(userId, productId, quantity);
-    
+
     // Next.js 16: Use updateTag for read-your-writes semantics
     // This ensures the user sees their changes immediately
     updateTag(`cart-${userId}`);
     updateTag(`product-${productId}`);
-    
+
     // Also revalidate paths for immediate UI updates
     revalidatePath("/cart");
     revalidatePath("/");
 
-    return { 
-      ok: true, 
-      data: { 
+    return {
+      ok: true,
+      data: {
         message: `${quantity} ${product.title} added to cart`,
         productId,
-        quantity 
-      } 
+        quantity,
+      },
     };
   } catch (error) {
     console.error("Add to cart error:", error);
-    return { 
-      ok: false, 
-      error: error instanceof Error ? error.message : "Failed to add item to cart" 
+    return {
+      ok: false,
+      error:
+        error instanceof Error ? error.message : "Failed to add item to cart",
     };
   }
 }

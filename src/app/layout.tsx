@@ -17,8 +17,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Real-Time Launchpad - Modern E-commerce Demo",
-  description: "A showcase of React 19 and Next.js features including Server Components, Suspense, Actions, and optimistic updates",
-  keywords: ["React 19", "Next.js", "Server Components", "Suspense", "E-commerce"],
+  description:
+    "A showcase of React 19 and Next.js features including Server Components, Suspense, Actions, and optimistic updates",
+  keywords: [
+    "React 19",
+    "Next.js",
+    "Server Components",
+    "Suspense",
+    "E-commerce",
+  ],
   authors: [{ name: "Rich Lewis" }],
 };
 
@@ -48,43 +55,71 @@ export default function RootLayout({
                     </h1>
                   </div>
                   <nav className="hidden md:flex space-x-8">
-                    <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <Link
+                      href="/"
+                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    >
                       Home
                     </Link>
-                    <Link href="/search" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <Link
+                      href="/search"
+                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    >
                       Search
                     </Link>
-                    <Link href="/starred" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <Link
+                      href="/starred"
+                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    >
                       Favorites
                     </Link>
-                    <Link href="/cart" className="flex items-center gap-2 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold border border-blue-200 transition-all duration-200">
+                    <Link
+                      href="/cart"
+                      className="flex items-center gap-2 bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 px-4 py-2 rounded-lg text-sm font-semibold border border-blue-200 transition-all duration-200"
+                    >
                       <ShoppingCart className="h-4 w-4" />
                       Cart
                     </Link>
-                    <Link href="/profile" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <Link
+                      href="/profile"
+                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    >
                       Profile
                     </Link>
-                    <Link href="/admin" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">
+                    <Link
+                      href="/admin"
+                      className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium"
+                    >
                       Admin
                     </Link>
                   </nav>
                 </div>
               </div>
             </header>
-            
-            <main className="flex-1">
-              {children}
-            </main>
-            
+
+            <main className="flex-1">{children}</main>
+
             <footer className="bg-white border-t">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="text-center text-gray-600">
-                  <p>Real-Time Launchpad - Demonstrating React 19 & Next.js 16 Features</p>
+                  <p>
+                    Real-Time Launchpad - Demonstrating React 19 & Next.js 16
+                    Features
+                  </p>
                   <p className="text-sm mt-2">
-                    Built by Rich Lewis with React 19, Next.js 16, Server Components, Suspense, and Actions
+                    Built by Rich Lewis with React 19, Next.js 16, Server
+                    Components, Suspense, and Actions
                   </p>
                   <p className="text-xs mt-2 text-gray-500">
-                    Images by <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-700">Unsplash</a>
+                    Images by{" "}
+                    <a
+                      href="https://unsplash.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-700"
+                    >
+                      Unsplash
+                    </a>
                   </p>
                 </div>
               </div>

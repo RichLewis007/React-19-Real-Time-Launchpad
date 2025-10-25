@@ -11,7 +11,8 @@
 
 </div>
 
-# React 19 Real-Time Launchpad 
+# React 19 Real-Time Launchpad
+
 An educational app with extensive discussion of features used.
 
 This is my take on what e-commerce could look like with React 19. I built this demo to explore the latest features and show how they work together in a real application.
@@ -28,12 +29,12 @@ Here's what the app looks like in action:
 
 <div align="center">
 
-| Home Page | Search Page |
-|-----------|-------------|
+| Home Page                                                                                                                               | Search Page                                                                                                                             |
+| --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="./assets/home-page-top.jpg" alt="Home Page" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> | <img src="./assets/search-page.jpg" alt="Search Page" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> |
 
-| Admin Panel (Top) | Admin Panel (Bottom) |
-|-------------------|---------------------|
+| Admin Panel (Top)                                                                                                                              | Admin Panel (Bottom)                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="./assets/admin-page-top.jpg" alt="Admin Panel Top" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> | <img src="./assets/admin-page-bottom.jpg" alt="Admin Panel Bottom" width="400" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" /> |
 
 </div>
@@ -41,6 +42,7 @@ Here's what the app looks like in action:
 ## What's does this demo app include?
 
 ### The React 19 stuff I'm excited about
+
 - **Server Components** - Awesome! Server-side rendering that makes sense for React
 - **Suspense Streaming** - Loading states that don't suck
 - **Server Actions** - Forms that just work without API endpoints
@@ -49,6 +51,7 @@ Here's what the app looks like in action:
 - **React Compiler** - Performance optimizations without the manual work
 
 ### The actual features
+
 - Browse and search products
 - Real-time search that's actually responsive
 - Shopping cart with instant updates
@@ -61,6 +64,7 @@ Here's what the app looks like in action:
 ## Tech choices
 
 I went with:
+
 - **Next.js 16** with the App Router and Cache Components (latest and greatest)
 - **React 19.2** with the new compiler and latest features
 - **Turbopack** as the default bundler (2-5x faster builds)
@@ -81,6 +85,18 @@ npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000) and check it out.
+
+### Development Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues automatically
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+
+**Note:** This project uses Husky pre-commit hooks to automatically run ESLint and Prettier on staged files before each commit.
 
 ## How it's organized
 
@@ -103,6 +119,7 @@ src/
 ## The interesting parts
 
 ### Server Components
+
 I'm rendering product lists on the server, which means faster loading and better SEO. No more hydration mismatches!
 
 ```tsx
@@ -118,6 +135,7 @@ export default async function ProductList({ products }: ProductListProps) {
 ```
 
 ### Suspense Streaming
+
 The home page loads progressively, so users see content as it's ready instead of waiting for everything:
 
 ```tsx
@@ -127,6 +145,7 @@ The home page loads progressively, so users see content as it's ready instead of
 ```
 
 ### Server Actions
+
 Forms work without API endpoints. Just write a function and call it from a form:
 
 ```tsx
@@ -139,16 +158,18 @@ export async function addToCart(
 ```
 
 ### Optimistic Updates
+
 The star button updates instantly, then reverts if something goes wrong:
 
 ```tsx
 const [starred, setStarred] = useOptimistic(
-  initialStarred, 
+  initialStarred,
   (_prev, next: boolean) => next
 );
 ```
 
 ### Concurrent Rendering
+
 Search doesn't block the UI anymore:
 
 ```tsx
@@ -157,11 +178,12 @@ const deferredQuery = useDeferredValue(query);
 ```
 
 ### Favorites System
+
 Star products to save them for later with instant feedback:
 
 ```tsx
 const [starred, setStarred] = useOptimistic(
-  initialStarred, 
+  initialStarred,
   (_prev, next: boolean) => next
 );
 ```
@@ -169,6 +191,7 @@ const [starred, setStarred] = useOptimistic(
 ## Testing things out
 
 There's an admin panel at `/admin` where you can:
+
 - Turn on slow mode to see Suspense streaming in action
 - Enable error mode to test error boundaries
 - Check out performance metrics
@@ -176,6 +199,7 @@ There's an admin panel at `/admin` where you can:
 ## Performance
 
 I've been testing this and it's pretty fast:
+
 - Lighthouse scores in the 95+ range
 - First contentful paint under 1.5s
 - Largest contentful paint under 2.5s
@@ -191,6 +215,7 @@ We welcome contributions from the community! Please see our [Contributing Guide]
 - Our Code of Conduct
 
 Quick start:
+
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes

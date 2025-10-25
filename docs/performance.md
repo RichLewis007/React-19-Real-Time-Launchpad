@@ -45,12 +45,12 @@ export default function Home() {
     <div>
       {/* This loads first - it's fast */}
       <HeroSection />
-      
+
       {/* This loads when ready - user sees skeleton in meantime */}
       <Suspense fallback={<SectionSkeleton title="Trending Now" />}>
         <TrendingProducts />
       </Suspense>
-      
+
       {/* This loads independently - doesn't block other content */}
       <Suspense fallback={<SectionSkeleton title="Recommended for You" />}>
         <RecommendedProducts />
@@ -88,14 +88,14 @@ Users see immediate feedback when they interact with the app.
 ```tsx
 export function OptimisticStar({ productId, initialStarred }: OptimisticStarProps) {
   const [starred, setStarred] = useOptimistic(
-    initialStarred, 
+    initialStarred,
     (_prev, next: boolean) => next
   );
 
   const handleToggle = () => {
     const newStarred = !starred;
     setStarred(newStarred); // Immediate UI update
-    
+
     startTransition(async () => {
       try {
         const success = await toggleStar(productId);
@@ -139,7 +139,7 @@ Next.js automatically splits code by route, but I also split large components:
 
 ```tsx
 // Lazy load heavy components
-const HeavyComponent = lazy(() => import('./HeavyComponent'));
+const HeavyComponent = lazy(() => import("./HeavyComponent"));
 
 function App() {
   return (
@@ -182,7 +182,7 @@ const expensiveValue = useMemo(() => {
 For large product lists, I use virtualization:
 
 ```tsx
-import { useVirtualizer } from '@tanstack/react-virtual';
+import { useVirtualizer } from "@tanstack/react-virtual";
 
 function VirtualizedList({ items }) {
   const parentRef = useRef();
@@ -195,7 +195,7 @@ function VirtualizedList({ items }) {
   return (
     <div ref={parentRef} className="h-96 overflow-auto">
       <div style={{ height: virtualizer.getTotalSize() }}>
-        {virtualizer.getVirtualItems().map(virtualItem => (
+        {virtualizer.getVirtualItems().map((virtualItem) => (
           <div key={virtualItem.key} style={{ height: virtualItem.size }}>
             {items[virtualItem.index]}
           </div>
@@ -263,13 +263,13 @@ Measure first, then optimize:
 function MyComponent() {
   // Measure performance first
   const startTime = performance.now();
-  
+
   // Do the work
   const result = expensiveOperation();
-  
+
   const endTime = performance.now();
   console.log(`Operation took ${endTime - startTime} milliseconds`);
-  
+
   return <div>{result}</div>;
 }
 ```
@@ -295,6 +295,7 @@ function LoadingComponent() {
 Performance optimization is an ongoing process, not a one-time task. As React and Next.js evolve, new optimization techniques will emerge.
 
 The key is understanding the fundamentals:
+
 - Server Components reduce bundle size
 - Suspense streaming improves perceived performance
 - Concurrent rendering makes interactions responsive

@@ -35,7 +35,7 @@ export interface User {
 export interface UserPreferences {
   favoriteCategories: string[];
   notifications: boolean;
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
 }
 
 export interface Cart {

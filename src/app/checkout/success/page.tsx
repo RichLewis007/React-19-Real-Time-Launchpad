@@ -15,10 +15,12 @@ interface SuccessPageProps {
 async function OrderDetails({ searchParams }: SuccessPageProps) {
   const { orderId, total } = await searchParams;
   const totalAmount = total ? parseInt(total) : 0;
-  
+
   return (
     <div className="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md mx-auto">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">Order Details</h2>
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        Order Details
+      </h2>
       <div className="space-y-2">
         <div className="flex justify-between">
           <span className="text-gray-600">Order ID:</span>
@@ -59,7 +61,9 @@ function OrderDetailsSkeleton() {
   );
 }
 
-export default async function CheckoutSuccessPage({ searchParams }: SuccessPageProps) {
+export default async function CheckoutSuccessPage({
+  searchParams,
+}: SuccessPageProps) {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="text-center">
@@ -77,9 +81,10 @@ export default async function CheckoutSuccessPage({ searchParams }: SuccessPageP
 
         <div className="space-y-4">
           <p className="text-gray-600">
-            You will receive a confirmation email shortly with your order details.
+            You will receive a confirmation email shortly with your order
+            details.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/search"
@@ -87,7 +92,7 @@ export default async function CheckoutSuccessPage({ searchParams }: SuccessPageP
             >
               Continue Shopping
             </Link>
-            
+
             <Link
               href="/"
               className="inline-flex items-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors"

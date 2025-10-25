@@ -40,7 +40,7 @@ Cache Components use the new `"use cache"` directive to cache pages, components,
 // Example: Cached product component
 function ProductCard({ product }: { product: Product }) {
   "use cache";
-  
+
   return (
     <div className="product-card">
       <h3>{product.title}</h3>
@@ -82,11 +82,11 @@ import { updateTag } from "next/cache";
 export async function addToCart(formData: FormData) {
   // Update database
   await db.addToCart(userId, productId, quantity);
-  
+
   // Expire cache and refresh immediately
   updateTag(`cart-${userId}`);
   updateTag(`product-${productId}`);
-  
+
   return { success: true };
 }
 ```
@@ -101,7 +101,7 @@ import { refresh } from "next/cache";
 
 export async function markNotificationAsRead(notificationId: string) {
   await db.notifications.markAsRead(notificationId);
-  
+
   // Refresh notification count (not cached)
   refresh();
 }
@@ -115,12 +115,12 @@ Now requires a cache life profile for SWR behavior:
 import { revalidateTag } from "next/cache";
 
 // Use built-in profiles
-revalidateTag('blog-posts', 'max');     // Long-lived content
-revalidateTag('news-feed', 'hours');    // Medium-lived content
-revalidateTag('analytics', 'days');     // Short-lived content
+revalidateTag("blog-posts", "max"); // Long-lived content
+revalidateTag("news-feed", "hours"); // Medium-lived content
+revalidateTag("analytics", "days"); // Short-lived content
 
 // Custom profile
-revalidateTag('products', { revalidate: 3600 });
+revalidateTag("products", { revalidate: 3600 });
 ```
 
 ## Turbopack (Stable)
@@ -174,23 +174,21 @@ Next.js 16 replaces `middleware.ts` with `proxy.ts` to clarify network boundarie
 
 ```tsx
 // proxy.ts
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  
+
   // Add security headers
   const response = NextResponse.next();
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+
   return response;
 }
 
 export const config = {
-  matcher: [
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
 ```
 
@@ -233,12 +231,12 @@ Next.js 16 includes built-in support for React 19.2 features.
 #### View Transitions
 
 ```tsx
-import { Transition } from 'react';
+import { Transition } from "react";
 
 function ProductList({ products }) {
   return (
     <Transition>
-      {products.map(product => (
+      {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
     </Transition>
@@ -249,7 +247,7 @@ function ProductList({ products }) {
 #### useEffectEvent
 
 ```tsx
-import { useEffectEvent } from 'react';
+import { useEffectEvent } from "react";
 
 function ProductCard({ product, onAddToCart }) {
   const handleAddToCart = useEffectEvent(() => {
@@ -266,7 +264,7 @@ function ProductCard({ product, onAddToCart }) {
 #### Activity Component
 
 ```tsx
-import { Activity } from 'react';
+import { Activity } from "react";
 
 function LoadingState() {
   return (
@@ -294,8 +292,8 @@ Next.js 16 includes several performance optimizations:
 const nextConfig: NextConfig = {
   images: {
     minimumCacheTTL: 14400, // 4 hours (new default)
-    qualities: [75],         // New default quality
-    maximumRedirects: 3,     // Security default
+    qualities: [75], // New default quality
+    maximumRedirects: 3, // Security default
   },
 };
 ```
@@ -354,7 +352,7 @@ import { updateTag, refresh, revalidateTag } from "next/cache";
 // In Server Actions
 updateTag(`cart-${userId}`);
 refresh();
-revalidateTag('products', 'max');
+revalidateTag("products", "max");
 ```
 
 ## Best Practices
@@ -365,11 +363,11 @@ revalidateTag('products', 'max');
 // Cache expensive computations
 function ExpensiveComponent({ data }) {
   "use cache";
-  
+
   const processedData = useMemo(() => {
     return heavyComputation(data);
   }, [data]);
-  
+
   return <div>{processedData}</div>;
 }
 ```
@@ -380,10 +378,10 @@ function ExpensiveComponent({ data }) {
 // Server Actions with immediate feedback
 export async function updateProfile(formData: FormData) {
   await db.updateProfile(userId, profile);
-  
+
   // User sees changes immediately
   updateTag(`user-${userId}`);
-  
+
   return { success: true };
 }
 ```
@@ -405,12 +403,12 @@ const nextConfig: NextConfig = {
 // proxy.ts - Add security headers
 export default function proxy(request: NextRequest) {
   const response = NextResponse.next();
-  
+
   // Security headers
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
-  
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "origin-when-cross-origin");
+
   return response;
 }
 ```
@@ -422,11 +420,11 @@ export default function proxy(request: NextRequest) {
 export default async function Page({ params, searchParams }) {
   const { id } = await params;
   const { category } = await searchParams;
-  
+
   // Use in data fetching
   const product = await db.getProduct(id);
   const relatedProducts = await db.getProducts({ category });
-  
+
   return <ProductPage product={product} related={relatedProducts} />;
 }
 ```
@@ -486,4 +484,4 @@ This demo application showcases all these features in a real-world context, prov
 
 ---
 
-*This guide is part of the educational mission of this project. Each feature is implemented with detailed explanations to help developers understand not just what to do, but why these patterns work and how they improve application performance and developer experience.*
+_This guide is part of the educational mission of this project. Each feature is implemented with detailed explanations to help developers understand not just what to do, but why these patterns work and how they improve application performance and developer experience._

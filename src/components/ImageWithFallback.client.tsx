@@ -18,7 +18,7 @@ export default function ImageWithFallback({
   width,
   height,
   className,
-  fallbackSrc = "/placeholder-product.svg"
+  fallbackSrc = "/placeholder-product.svg",
 }: ImageWithFallbackProps) {
   const [imgSrc, setImgSrc] = useState(src);
 

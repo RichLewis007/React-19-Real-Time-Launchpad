@@ -31,26 +31,27 @@ export async function updateQuantity(
     }
 
     await db.updateCartItem(userId, productId, quantity);
-    
+
     // Next.js 16: Use updateTag for immediate cache updates
     updateTag(`cart-${userId}`);
     updateTag(`product-${productId}`);
-    
+
     revalidatePath("/cart");
 
-    return { 
-      ok: true, 
-      data: { 
+    return {
+      ok: true,
+      data: {
         message: quantity === 0 ? "Item removed from cart" : "Cart updated",
         productId,
-        quantity 
-      } 
+        quantity,
+      },
     };
   } catch (error) {
     console.error("Update quantity error:", error);
-    return { 
-      ok: false, 
-      error: error instanceof Error ? error.message : "Failed to update cart item" 
+    return {
+      ok: false,
+      error:
+        error instanceof Error ? error.message : "Failed to update cart item",
     };
   }
 }
