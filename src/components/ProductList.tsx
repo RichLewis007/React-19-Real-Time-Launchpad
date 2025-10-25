@@ -23,11 +23,12 @@ export default function ProductList({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {products.map((product) => (
+      {products.map((product, index) => (
         <ProductCard
           key={product.id}
           product={product}
           initialStarred={starredProductIds.includes(product.id)}
+          priority={index < 4}
         />
       ))}
     </div>

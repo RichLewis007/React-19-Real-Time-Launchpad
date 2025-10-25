@@ -29,11 +29,13 @@ import { useCart } from "./CartProvider";
 interface ProductCardProps {
   product: Product;
   initialStarred?: boolean;
+  priority?: boolean;
 }
 
 export default function ProductCard({
   product,
   initialStarred = false,
+  priority = false,
 }: ProductCardProps) {
   // useActionState is a React 19 hook that manages form state for Server Actions
   // It provides the current state and an action function that can be used in forms
@@ -68,6 +70,7 @@ export default function ProductCard({
           height={400}
           className="w-full h-full object-cover"
           fallbackSrc="/placeholder-product.svg"
+          loading={priority ? "eager" : "lazy"}
         />
         {/* OptimisticStar demonstrates React 19's optimistic updates pattern */}
         {/* It shows immediate feedback when clicked, then reverts if the server request fails */}
