@@ -4,6 +4,7 @@ import { useOptimistic, useTransition } from "react";
 import { Star } from "lucide-react";
 import { toggleStar } from "@/actions/updateProfile";
 import { cn } from "@/lib/utils";
+import { useCart } from "./CartProvider";
 
 interface OptimisticStarProps {
   productId: string;
@@ -16,6 +17,7 @@ export function OptimisticStar({
   initialStarred,
   className,
 }: OptimisticStarProps) {
+  const { incrementFavorites, decrementFavorites } = useCart();
   const [isPending, startTransition] = useTransition();
   const [starred, setStarred] = useOptimistic(
     initialStarred,
@@ -25,20 +27,38 @@ export function OptimisticStar({
   const handleToggle = () => {
     const newStarred = !starred;
 
+    // Update local count optimistically
+    if (newStarred) {
+      incrementFavorites();
+    } else {
+      decrementFavorites();
+    }
+
     startTransition(async () => {
       // Optimistic update
       setStarred(newStarred);
 
       try {
         const success = await toggleStar(productId);
+
         if (!success) {
           // Revert on failure
           setStarred(!newStarred);
+          if (newStarred) {
+            decrementFavorites();
+          } else {
+            incrementFavorites();
+          }
         }
       } catch (error) {
         console.error("Error toggling star:", error);
         // Revert on error
         setStarred(!newStarred);
+        if (newStarred) {
+          decrementFavorites();
+        } else {
+          incrementFavorites();
+        }
       }
     });
   };

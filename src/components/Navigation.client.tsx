@@ -3,23 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ShoppingCart, Star } from "lucide-react";
-import { useState } from "react";
+import { useCart } from "./CartProvider";
 
-interface NavigationProps {
-  initialCartCount: number;
-  initialFavoritesCount: number;
-}
-
-export default function Navigation({
-  initialCartCount,
-  initialFavoritesCount,
-}: NavigationProps) {
+export default function Navigation() {
   const pathname = usePathname();
-  const [cartCount] = useState(initialCartCount);
-  const [favoritesCount] = useState(initialFavoritesCount);
-
-  // Note: In a real app, you might want to listen for updates
-  // to cart and favorites and update these counts dynamically
+  const { cartCount, favoritesCount } = useCart();
 
   const isActive = (path: string) => pathname === path;
 

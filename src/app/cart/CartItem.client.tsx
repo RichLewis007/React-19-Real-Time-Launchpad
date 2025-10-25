@@ -5,6 +5,7 @@ import { updateQuantity } from "@/actions/updateQuantity";
 import { formatPrice } from "@/lib/utils";
 import { Product, CartItem as CartItemType } from "@/lib/types";
 import { Trash2, Minus, Plus } from "lucide-react";
+import { useCart } from "@/components/CartProvider";
 
 interface CartItemProps {
   item: CartItemType;
@@ -13,6 +14,25 @@ interface CartItemProps {
 
 export default function CartItem({ item, product }: CartItemProps) {
   const [state, formAction] = useActionState(updateQuantity, { ok: false });
+  const { incrementCart, decrementCart } = useCart();
+
+  // Handle successful quantity updates
+  const handleSubmit = async (formData: FormData) => {
+    const quantity = Number.parseInt(formData.get("quantity") as string) || 0;
+
+    // Calculate the difference in quantity
+    const difference = quantity - item.quantity;
+
+    if (difference > 0) {
+      // Increase in quantity
+      incrementCart(difference);
+    } else if (difference < 0) {
+      // Decrease in quantity
+      decrementCart(Math.abs(difference));
+    }
+
+    formAction(formData);
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md p-6">
@@ -32,7 +52,7 @@ export default function CartItem({ item, product }: CartItemProps) {
           </p>
         </div>
         <div className="flex items-center space-x-4">
-          <form action={formAction} className="flex items-center space-x-2">
+          <form action={handleSubmit} className="flex items-center space-x-2">
             <input type="hidden" name="productId" value={item.productId} />
             <input type="hidden" name="userId" value="demo_user" />
             <input
@@ -53,7 +73,7 @@ export default function CartItem({ item, product }: CartItemProps) {
             {item.quantity}
           </span>
 
-          <form action={formAction} className="flex items-center space-x-2">
+          <form action={handleSubmit} className="flex items-center space-x-2">
             <input type="hidden" name="productId" value={item.productId} />
             <input type="hidden" name="userId" value="demo_user" />
             <input type="hidden" name="quantity" value={item.quantity + 1} />
@@ -72,7 +92,7 @@ export default function CartItem({ item, product }: CartItemProps) {
             </div>
           </div>
 
-          <form action={formAction}>
+          <form action={handleSubmit}>
             <input type="hidden" name="productId" value={item.productId} />
             <input type="hidden" name="userId" value="demo_user" />
             <input type="hidden" name="quantity" value="0" />

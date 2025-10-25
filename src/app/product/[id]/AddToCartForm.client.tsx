@@ -1,9 +1,10 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { addToCart } from "@/actions/addToCart";
 import FormButton from "@/components/FormButton.client";
 import { Product } from "@/lib/types";
+import { useCart } from "@/components/CartProvider";
 
 interface AddToCartFormProps {
   product: Product;
@@ -11,10 +12,24 @@ interface AddToCartFormProps {
 
 export default function AddToCartForm({ product }: AddToCartFormProps) {
   const [state, formAction] = useActionState(addToCart, { ok: false });
+  const { incrementCart } = useCart();
+
+  // Update cart count after successful add
+  useEffect(() => {
+    if (state.ok && state.data) {
+      // Get quantity from the form or default to 1
+      const quantity = state.data.quantity || 1;
+      incrementCart(quantity);
+    }
+  }, [state.ok, state.data, incrementCart]);
+
+  const handleSubmit = async (formData: FormData) => {
+    formAction(formData);
+  };
 
   return (
     <div className="space-y-4">
-      <form action={formAction} className="space-y-4">
+      <form action={handleSubmit} className="space-y-4">
         <input type="hidden" name="productId" value={product.id} />
         <input type="hidden" name="userId" value="demo_user" />
 

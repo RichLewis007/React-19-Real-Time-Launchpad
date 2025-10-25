@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ErrorBoundary } from "@/components/ErrorBoundary.client";
 import Navigation from "@/components/Navigation.client";
+import { CartProvider } from "@/components/CartProvider";
 import { db } from "@/lib/db";
 
 const geistSans = Geist({
@@ -54,53 +55,57 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        data-cart-count={cartCount}
+        data-favorites-count={favoritesCount}
       >
         <ErrorBoundary>
-          <div className="min-h-screen flex flex-col">
-            <header className="bg-white shadow-sm border-b">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
-                  <div className="flex items-center">
-                    <h1 className="text-xl font-bold text-gray-900">
-                      Real-Time Launchpad
-                    </h1>
+          <CartProvider
+            initialCartCount={cartCount}
+            initialFavoritesCount={favoritesCount}
+          >
+            <div className="min-h-screen flex flex-col">
+              <header className="bg-white shadow-sm border-b">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="flex justify-between items-center h-16">
+                    <div className="flex items-center">
+                      <h1 className="text-xl font-bold text-gray-900">
+                        Real-Time Launchpad
+                      </h1>
+                    </div>
+                    <Navigation />
                   </div>
-                  <Navigation
-                    initialCartCount={cartCount}
-                    initialFavoritesCount={favoritesCount}
-                  />
                 </div>
-              </div>
-            </header>
+              </header>
 
-            <main className="flex-1">{children}</main>
+              <main className="flex-1">{children}</main>
 
-            <footer className="bg-white border-t">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div className="text-center text-gray-600">
-                  <p>
-                    Real-Time Launchpad - Demonstrating React 19 & Next.js 16
-                    Features
-                  </p>
-                  <p className="text-sm mt-2">
-                    Built by Rich Lewis with React 19, Next.js 16, Server
-                    Components, Suspense, and Actions
-                  </p>
-                  <p className="text-xs mt-2 text-gray-500">
-                    Images by{" "}
-                    <a
-                      href="https://unsplash.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-700"
-                    >
-                      Unsplash
-                    </a>
-                  </p>
+              <footer className="bg-white border-t">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                  <div className="text-center text-gray-600">
+                    <p>
+                      Real-Time Launchpad - Demonstrating React 19 & Next.js 16
+                      Features
+                    </p>
+                    <p className="text-sm mt-2">
+                      Built by Rich Lewis with React 19, Next.js 16, Server
+                      Components, Suspense, and Actions
+                    </p>
+                    <p className="text-xs mt-2 text-gray-500">
+                      Images by{" "}
+                      <a
+                        href="https://unsplash.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:text-blue-700"
+                      >
+                        Unsplash
+                      </a>
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </footer>
-          </div>
+              </footer>
+            </div>
+          </CartProvider>
         </ErrorBoundary>
       </body>
     </html>

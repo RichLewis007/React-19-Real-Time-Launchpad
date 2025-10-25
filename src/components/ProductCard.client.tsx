@@ -5,9 +5,10 @@ import { formatPrice } from "@/lib/utils";
 import { ShoppingCart, Star } from "lucide-react";
 import { OptimisticStar } from "./OptimisticStar.client";
 import { addToCart } from "@/actions/addToCart";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useId } from "react";
 import ImageWithFallback from "./ImageWithFallback.client";
+import { useCart } from "./CartProvider";
 
 /**
  * ProductCard Component
@@ -38,12 +39,22 @@ export default function ProductCard({
   // It provides the current state and an action function that can be used in forms
   // The second parameter is the initial state
   const [state, formAction] = useActionState(addToCart, { ok: false });
+  const { incrementCart } = useCart();
 
   // useId generates unique IDs for form elements to avoid conflicts
   // This is especially important when multiple ProductCards are rendered
   // Note: Currently unused but kept for future use
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _formId = useId();
+
+  // Update cart count when add to cart succeeds
+  useEffect(() => {
+    if (state.ok && state.data) {
+      // Get quantity from the response or default to 1
+      const quantity = state.data.quantity || 1;
+      incrementCart(quantity);
+    }
+  }, [state.ok, state.data, incrementCart]);
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-200">

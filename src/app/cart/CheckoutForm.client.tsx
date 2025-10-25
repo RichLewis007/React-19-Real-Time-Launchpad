@@ -3,9 +3,19 @@
 import { useActionState } from "react";
 import { checkout as checkoutAction } from "@/actions/checkout";
 import FormButton from "@/components/FormButton.client";
+import { useCart } from "@/components/CartProvider";
+import { useEffect } from "react";
 
 export default function CheckoutForm() {
   const [state, formAction] = useActionState(checkoutAction, { ok: false });
+  const { updateCartCount } = useCart();
+
+  // Reset cart count when checkout is successful
+  useEffect(() => {
+    if (state.ok) {
+      updateCartCount(0);
+    }
+  }, [state.ok, updateCartCount]);
 
   return (
     <form action={formAction} className="mt-6">
